@@ -1,4 +1,8 @@
-# THIS IS THE OLD FILE, WE WILL REWRITE THIS
+# Platform Game
+
+Years ago I built a platform game in javascript. However, at the time I didn't know JavaScript that well, and my code looked like shit. It's barely readable, and not at all scalable. In this repo I will rewrite that code.
+
+#### This is the old file
 
 ```js
 
