@@ -6,8 +6,8 @@ var vector = function vector(xValue, yValue) {
       y = yValue;
 
   return {
-    'add': function add(vector) {
-      return vector(x + vector.getX(), y + vector.getY());
+    'add': function add(vector2) {
+      return vector(x + vector2.getX(), y + vector2.getY());
     },
     'scale': function scale(factor) {
       return vector(x * factor, y * factor);
@@ -20,3 +20,5 @@ var vector = function vector(xValue, yValue) {
     }
   };
 };
+
+module.exports = vector;

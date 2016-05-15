@@ -4,10 +4,10 @@ const vector = (xValue, yValue) => {
         y = yValue
 
   return {
-    'add': (vector) => vector(
+    'add': (vector2) => vector(
 
-      x + vector.getX(),
-      y + vector.getY()
+      x + vector2.getX(),
+      y + vector2.getY()
 
     ),
     'scale': (factor) => vector(

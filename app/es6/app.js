@@ -1,8 +1,9 @@
 const app = () => {
 
-  let gameObjects = [],
-      keysDown = [5],
-      engine
+  let engine
+
+  const gameObjects = [],
+        keysDown = []
 
   return {
     'init': () => {
@@ -13,13 +14,15 @@ const app = () => {
     },
     'onKeyDown': (event) => {
 
-      let key = event.keyCode
+      const key = event.keyCode
 
       if ( keysDown.find(v => v===key) === undefined ) {
         keysDown.push(key)
       }
+      
 
-    }
+    },
+    'getEngine': () => engine
   }
 
 }

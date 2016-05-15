@@ -2,9 +2,10 @@
 
 var app = function app() {
 
+  var engine = void 0;
+
   var gameObjects = [],
-      keysDown = [5],
-      engine = void 0;
+      keysDown = [];
 
   return {
     'init': function init() {
@@ -21,6 +22,9 @@ var app = function app() {
       }) === undefined) {
         keysDown.push(key);
       }
+    },
+    'getEngine': function getEngine() {
+      return engine;
     }
   };
 };

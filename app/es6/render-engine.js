@@ -22,7 +22,7 @@ const renderEngine = () => {
       document.body.appendChild(canvas)
 
     },
-    'render': (gObject) => {
+    'draw': (gObject) => {
 
       ctx.fillStyle = gObject.getColor()
       ctx.fillRect(

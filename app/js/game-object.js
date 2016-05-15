@@ -14,7 +14,7 @@ var gameObject = function gameObject(p, v, s) {
     'accelerate': function accelerate(vector) {
       return velocity = velocity.scale(vector);
     },
-    'transform': function transform(vector) {
+    'translate': function translate(vector) {
       return position = position.add(vector);
     },
     'setSize': function setSize(vector) {
@@ -37,3 +37,5 @@ var gameObject = function gameObject(p, v, s) {
     }
   };
 };
+
+module.exports = gameObject;

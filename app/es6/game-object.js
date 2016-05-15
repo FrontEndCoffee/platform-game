@@ -8,7 +8,7 @@ const gameObject = (p, v, s) => {
   return {
     'move': (seconds) => position = position.add(velocity.scale(seconds)),
     'accelerate': (vector) => velocity = velocity.scale(vector),
-    'transform': (vector) => position = position.add(vector),
+    'translate': (vector) => position = position.add(vector),
     'setSize': (vector) => size = vector,
     'getSize': () => size,
     'setColor': (string) => color = string,

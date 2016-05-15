@@ -21,7 +21,7 @@ var renderEngine = function renderEngine() {
       ctx = canvas.getContext('2d');
       document.body.appendChild(canvas);
     },
-    'render': function render(gObject) {
+    'draw': function draw(gObject) {
 
       ctx.fillStyle = gObject.getColor();
       ctx.fillRect(gObject.getPosition().getX(), gObject.getPosition().getY(), gObject.getSize().getX(), gObject.getSize().getY());
