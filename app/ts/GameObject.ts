@@ -7,7 +7,7 @@ export class GameObject {
   private size: Vector
   private color: string
 
-  public constructor(position: Vector, velocity: Vector, size: Vector) {
+  constructor(position: Vector, velocity: Vector, size: Vector) {
     this.position = position || new Vector(0, 0)
     this.velocity = velocity || new Vector(0, 0)
     this.size = size || new Vector(5, 5)
@@ -21,7 +21,7 @@ export class GameObject {
   }
 
   public accelerate(dVel: Vector): void {
-    this.velocity = this.velocity.scale(dVel)
+    this.velocity = this.velocity.add(dVel)
   }
 
   public translate(dPos: Vector): void {
