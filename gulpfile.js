@@ -25,5 +25,5 @@ gulp.task('tslint', () => {
 })
 
 gulp.task('watch', () => {
-  gulp.watch('app/ts/**/*.ts', ['tslint', 'ts'])
+  gulp.watch('app/ts/**/*.ts', ['ts'])
 })
