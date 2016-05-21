@@ -1,3 +1,5 @@
+import { GameObject } from './GameObject'
+
 export class RenderEngine {
 
   private canvas: any
@@ -11,7 +13,7 @@ export class RenderEngine {
     this.canvas = document.createElement('canvas')
     this.canvas.height = this.height
     this.canvas.width = this.width
-    this.ctx = canvas.getContext('2d')
+    this.ctx = this.canvas.getContext('2d')
     document.body.appendChild(this.canvas)
   }
 
@@ -34,7 +36,7 @@ export class RenderEngine {
   }
 
   public getContext(): any {
-    return this.context
+    return this.ctx
   }
 
   public getCanvas(): any {
