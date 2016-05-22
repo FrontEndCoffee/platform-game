@@ -4,7 +4,7 @@
   "description": "A code rewrite of my old ugly platform game",
   "main": "index.js",
   "scripts": {
-    "test": "gulp test"
+    "ci": "gulp build"
   },
   "repository": {
     "type": "git",
@@ -18,6 +18,7 @@
   "homepage": "https://github.com/FrontEndCoffee/platform-game#readme",
   "devDependencies": {
     "browserify": "^13.0.1",
+    "del": "^2.2.0",
     "gulp": "^3.9.1",
     "gulp-cli": "^1.2.1",
     "gulp-sequence": "^0.4.5",
