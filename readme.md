@@ -1,4 +1,4 @@
-# Platform Game
+# Platform Game [![Build Status](https://travis-ci.org/FrontEndCoffee/platform-game.svg?branch=master)](https://travis-ci.org/FrontEndCoffee/platform-game)
 
 Years ago I built a platform game in javascript. However, at the time I didn't know JavaScript that well, and my code looked like shit. It's barely readable, and not at all scalable. In this repo I will rewrite that code.
 
