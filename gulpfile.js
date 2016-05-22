@@ -5,6 +5,9 @@ var source = require('vinyl-source-stream')
 var tslint = require('gulp-tslint')
 var seq = require('gulp-sequence')
 var del = require('del')
+var typescript = require('gulp-typescript')
+var tape = require('gulp-tape')
+var tapColorize = require('tap-colorize')
 
 // development related tasks
 
@@ -33,11 +36,30 @@ gulp.task('ts', () => {
 // test related tasks
 
 gulp.task('test', (callback) => {
-  seq('test:tslint', callback)
+  return seq('test:tslint', 'test:unit', callback)
+})
+
+gulp.task('test:unit', (callback) => {
+  return seq('test:unit:clean', 'test:unit:compile', 'test:unit:test', callback)
+})
+
+gulp.task('test:unit:clean', () => {
+  return del('test/temp/**/*.js')
+})
+
+gulp.task('test:unit:compile', () => {
+  return gulp.src('app/ts/**/*.ts')
+    .pipe(typescript())
+    .pipe(gulp.dest('test/temp'))
+})
+
+gulp.task('test:unit:test', () => {
+  return gulp.src('test/**/*.spec.js')
+    .pipe(tape({reporter: tapColorize()}))
 })
 
 gulp.task('test:tslint', () => {
-  gulp.src('app/ts/**/*.ts')
+  return gulp.src('app/ts/**/*.ts')
     .pipe(tslint())
     .pipe(tslint.report('verbose'))
 })
@@ -45,17 +67,15 @@ gulp.task('test:tslint', () => {
 // build related tasks
 
 gulp.task('build', ['test'], (callback) => {
-  seq('build:clean', 'build:html', 'build:ts', callback)
+  return seq('build:clean', 'build:html', 'build:ts', callback)
 })
 
 gulp.task('build:clean', () => {
-  return del(
-    'dest/**/*'
-  )
+  return del('dest/**/*')
 })
 
 gulp.task('build:html', () => {
-  gulp.src(['app/**/*.html', 'app/**/*.css'])
+  return gulp.src(['app/**/*.html', 'app/**/*.css'])
     .pipe(gulp.dest('dist'))
 })
 
