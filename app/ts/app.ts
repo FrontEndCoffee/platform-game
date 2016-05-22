@@ -13,15 +13,15 @@ class App {
     this.keysDown = []
     this.gameObjects = []
   }
-  
+
   public update(): void {
     // add physics
     this.engine.clearFrame()
-    this.gameObjects.forEach(v => {
+    this.gameObjects.forEach((v: GameObject) => {
       this.engine.draw(v)
     })
   }
-  
+
   public addGameObject(obj: GameObject): void {
     this.gameObjects.push(obj)
   }
@@ -57,18 +57,15 @@ class App {
 // init code
 
 window.onload = () => {
-  let platformer = new App(
+  let platformer: App = new App(
     document,
     window.innerHeight,
     window.innerWidth
   )
-  window.onkeydown = e => platformer.onKeyDown(e.keyCode)
-  window.onkeyup = e => platformer.onKeyUp(e.keyCode)
-  console.log(platformer)
+  window.onkeydown = (e: any) => platformer.onKeyDown(e.keyCode)
+  window.onkeyup = (e: any) => platformer.onKeyUp(e.keyCode)
 
-  /**
-    Debug code
-  */
+  // debug code
   platformer.addGameObject(new GameObject(
     new Vector(10, 10),
     new Vector(10, 10),
