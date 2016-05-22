@@ -32,3 +32,9 @@ gulp.task('tslint', () => {
 gulp.task('watch', () => {
   gulp.watch('app/ts/**/*.ts', ['ts'])
 })
+
+// TESTS
+
+gulp.task('test', (callback) => {
+  seq('tslint', callback)
+})
