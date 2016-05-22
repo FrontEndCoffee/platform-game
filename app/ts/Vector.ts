@@ -4,8 +4,8 @@ export class Vector {
   private y: number
 
   constructor(x: number, y: number) {
-    this.x = (x===undefined) ? 0 : x
-    this.y = (y===undefined) ? 0 : y
+    this.x = (x === undefined) ? 0 : x
+    this.y = (y === undefined) ? 0 : y
   }
 
   public add(v: Vector): Vector {
