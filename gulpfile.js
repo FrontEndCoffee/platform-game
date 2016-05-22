@@ -55,7 +55,9 @@ gulp.task('test:unit:compile', () => {
 
 gulp.task('test:unit:test', () => {
   return gulp.src('test/**/*.spec.js')
-    .pipe(tape({reporter: tapColorize()}))
+    .pipe(tape({
+      reporter: tapColorize()
+    }))
 })
 
 gulp.task('test:tslint', () => {
