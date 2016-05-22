@@ -3,9 +3,6 @@ var Vector = require('./temp/Vector').Vector
 
 test('Vector', assert => {
 
-  assert.equal(new Vector(2,3).getX(), 2, 'getter should return given value for x')
-  assert.equal(new Vector(2,3).getY(), 3, 'getter should return given value for y')
-
   assert.deepEqual(
     new Vector(),
     new Vector(0, 0),
