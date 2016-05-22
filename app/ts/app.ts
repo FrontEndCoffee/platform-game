@@ -18,6 +18,7 @@ class App {
     let indexOfKey: number = this.keysDown.indexOf(key)
     if (indexOfKey === -1) {
       this.keysDown.push(key)
+      console.log(this.keysDown)
     }
   }
 
@@ -25,6 +26,7 @@ class App {
     let indexOfKey: number = this.keysDown.indexOf(key)
     if (indexOfKey > -1) {
       this.keysDown.splice(indexOfKey, 1)
+      console.log(this.keysDown)
     }
   }
 
@@ -48,6 +50,8 @@ window.onload = () => {
     window.innerHeight,
     window.innerWidth
   )
+  window.onkeydown = e => platformer.onKeyDown(e.keyCode)
+  window.onkeyup = e => platformer.onKeyUp(e.keyCode)
   console.log(platformer)
 
   /**
