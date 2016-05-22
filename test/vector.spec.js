@@ -1,46 +1,28 @@
 var test = require('tape')
 var Vector = require('./temp/Vector').Vector
 
-test('Vector getter', assert => {
+test('Vector', assert => {
 
-  let actual = new Vector(3,5)
+  assert.equal(new Vector(2,3).getX(), 2, 'getter should return given value for x')
+  assert.equal(new Vector(2,3).getY(), 3, 'getter should return given value for y')
 
-  assert.plan(2)
-  assert.equal(actual.getX(), 3)
-  assert.equal(actual.getY(), 5)
+  assert.deepEqual(
+    new Vector(),
+    new Vector(0, 0),
+    'should default to (0,0) when no arguments are given'
+  )
 
-})
+  assert.deepEqual(
+    new Vector(3,5).add( new Vector(4,6) ),
+    new Vector(7,11),
+    'should sum up the given vectors'
+  )
 
-test('Vector add', assert => {
+  assert.deepEqual(
+    new Vector(2,3).scale(5),
+    new Vector(10,15),
+    'should scale both x and y with the given factor'
+  )
 
-  let v1 = new Vector(3,5)
-  let v2 = new Vector(4,6)
-  let actual = v1.add(v2)
-  let expected = new Vector(7,11)
-
-  assert.plan(2)
-  assert.equal(actual.getX(), expected.getX())
-  assert.equal(actual.getY(), expected.getY())
-
-})
-
-test('Vector scale', assert => {
-
-  let v1 = new Vector(2,3)
-  let actual = v1.scale(5)
-  let expected = new Vector(10, 15)
-
-  assert.plan(2)
-  assert.equal(actual.getX(), expected.getX())
-  assert.equal(actual.getX(), expected.getX())
-})
-
-test('Vector no-arguments', assert => {
-
-  let actual = new Vector()
-  let expected = new Vector(0,0)
-
-  assert.plan(2)
-  assert.equal(actual.getX(), expected.getX())
-  assert.equal(actual.getY(), expected.getY())
+  assert.end()
 })

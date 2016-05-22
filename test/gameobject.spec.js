@@ -2,7 +2,7 @@ var test = require('tape')
 var GameObject = require('./temp/GameObject').GameObject
 var Vector = require('./temp/Vector').Vector
 
-test('GameObject construct', assert => {
+test('GameObject', assert => {
 
   let actual = new GameObject()
   let expected = new GameObject(
@@ -10,6 +10,8 @@ test('GameObject construct', assert => {
     new Vector(0,0),
     new Vector(5,5)
   )
+  assert.deepEqual(actual, expected, 'should get default values assigned when no arguments are given')
 
-  assert.equal(actual, expected)
+  
+  assert.end()
 })
