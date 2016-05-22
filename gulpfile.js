@@ -3,6 +3,11 @@ var browserify = require('browserify')
 var tsify = require('tsify')
 var source = require('vinyl-source-stream')
 var tslint = require('gulp-tslint')
+var seq = require('gulp-sequence')
+
+gulp.task('default', (callback) => {
+  seq('tslint', 'ts', callback)
+})
 
 gulp.task('ts', () => {
   return browserify({
