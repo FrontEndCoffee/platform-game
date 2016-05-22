@@ -27,6 +27,10 @@ export class RenderEngine {
     )
   }
 
+  public clearFrame(): void {
+    this.ctx.clearRect(0, 0, this.width, this.height)
+  }
+
   public getHeight(): number {
     return this.height
   }
@@ -41,10 +45,6 @@ export class RenderEngine {
 
   public getCanvas(): any {
     return this.canvas
-  }
-
-  private clearFrame(): void {
-    this.ctx.clearRect(0, 0, this.width, this.height)
   }
 
 }

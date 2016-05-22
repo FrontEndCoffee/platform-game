@@ -13,6 +13,18 @@ class App {
     this.keysDown = []
     this.gameObjects = []
   }
+  
+  public update(): void {
+    // add physics
+    this.engine.clearFrame()
+    this.gameObjects.forEach(v => {
+      this.engine.draw(v)
+    })
+  }
+  
+  public addGameObject(obj: GameObject): void {
+    this.gameObjects.push(obj)
+  }
 
   public onKeyDown(key: number): void {
     let indexOfKey: number = this.keysDown.indexOf(key)
@@ -57,10 +69,10 @@ window.onload = () => {
   /**
     Debug code
   */
-  let apple: GameObject = new GameObject(
+  platformer.addGameObject(new GameObject(
     new Vector(10, 10),
     new Vector(10, 10),
     new Vector(10, 10)
-  );
-  platformer.getEngine().draw(apple)
+  ))
+  platformer.update()
 }
