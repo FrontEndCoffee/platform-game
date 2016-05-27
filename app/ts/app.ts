@@ -1,21 +1,29 @@
 import { RenderEngine } from './RenderEngine'
 import { GameObject } from './GameObject'
 import { Vector } from './Vector'
+import { PhysicsEngine } from './PhysicsEngine'
 
 class App {
 
   private engine: RenderEngine
-  private keysDown: number[]
+  private physics: PhysicsEngine
   private gameObjects: GameObject[]
+  private keysDown: number[]
+  private latestFrameTimestamp: number
+
 
   constructor(doc: any, height: number, width: number) {
     this.engine = new RenderEngine(doc, height, width)
+    this.physics = new PhysicsEngine()
     this.keysDown = []
     this.gameObjects = []
+    this.latestFrameTimestamp = this.getTime()
   }
 
   public update(): void {
-    // add physics
+    let deltaTime: number = this.getTime() - this.latestFrameTimestamp
+    this.latestFrameTimestamp = this.getTime()
+    this.physics.update(this.gameObjects, deltaTime)
     this.engine.clearFrame()
     this.gameObjects.forEach((v: GameObject) => {
       this.engine.draw(v)
@@ -48,6 +56,10 @@ class App {
     return this.engine
   }
 
+  private getTime(): number {
+    return new Date().getTime()
+  }
+
 }
 
 // init code
@@ -72,7 +84,7 @@ window.onload = () => {
     new Vector(10, 10),
     new Vector(10, 10)
   ))
-  let run = () => {
+  let run: any = () => {
     platformer.update()
     requestAnimationFrame(run)
   }
