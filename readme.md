@@ -2,7 +2,8 @@
 [![Build Status](https://travis-ci.org/FrontEndCoffee/platform-game.svg?branch=master)](https://travis-ci.org/FrontEndCoffee/platform-game)
 [![npm](https://img.shields.io/npm/l/express.svg?maxAge=2592000)]()
 [![npm](https://img.shields.io/npm/v/npm.svg?maxAge=2592000)]()
-[![Throughput Graph](https://graphs.waffle.io/FrontEndCoffee/platform-game/throughput.svg)](https://waffle.io/FrontEndCoffee/platform-game/metrics/throughput)
+
+[![Stories in Ready](https://badge.waffle.io/FrontEndCoffee/platform-game.svg?label=ready&title=Ready)](http://waffle.io/FrontEndCoffee/platform-game)
 
 Years ago I built a platform game in javascript. However, at the time I didn't know JavaScript that well, and my code looked like shit. It's barely readable, and not at all scalable. In this repo I will rewrite that code.
 
