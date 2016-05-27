@@ -4,7 +4,8 @@
   "description": "A code rewrite of my old ugly platform game",
   "main": "index.js",
   "scripts": {
-    "ci": "gulp build"
+    "ci": "gulp build",
+    "gulp": "gulp"
   },
   "repository": {
     "type": "git",
