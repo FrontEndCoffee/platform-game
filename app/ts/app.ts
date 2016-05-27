@@ -30,7 +30,6 @@ class App {
     let indexOfKey: number = this.keysDown.indexOf(key)
     if (indexOfKey === -1) {
       this.keysDown.push(key)
-      console.log(this.keysDown)
     }
   }
 
@@ -38,7 +37,6 @@ class App {
     let indexOfKey: number = this.keysDown.indexOf(key)
     if (indexOfKey > -1) {
       this.keysDown.splice(indexOfKey, 1)
-      console.log(this.keysDown)
     }
   }
 
@@ -51,8 +49,6 @@ class App {
   }
 
 }
-
-
 
 // init code
 
@@ -71,5 +67,14 @@ window.onload = () => {
     new Vector(10, 10),
     new Vector(10, 10)
   ))
-  platformer.update()
+  platformer.addGameObject(new GameObject(
+    new Vector(30, 10),
+    new Vector(10, 10),
+    new Vector(10, 10)
+  ))
+  let run = () => {
+    platformer.update()
+    requestAnimationFrame(run)
+  }
+  run()
 }
