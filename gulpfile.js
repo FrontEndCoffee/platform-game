@@ -15,7 +15,7 @@ gulp.task('default', (callback) => {
   seq('ts', callback)
 })
 
-gulp.task('watch', () => {
+gulp.task('watch', ['ts'], () => {
   gulp.watch('app/ts/**/*.ts', ['ts'])
 })
 
@@ -27,10 +27,15 @@ gulp.task('ts', () => {
     cache: {},
     packageCache: {}
   })
-  .plugin(tsify)
-  .bundle()
-  .pipe(source('bundle.js'))
-  .pipe(gulp.dest('app/js'))
+    .plugin(tsify)
+    .bundle().on('error', function (e) {
+      console.error("|====================================================|")
+      console.error("| WARNING: ts line failed, Syntax errors in ts files |")
+      console.error("|====================================================|")
+      console.error(e)
+    })
+    .pipe(source('bundle.js'))
+    .pipe(gulp.dest('app/js'))
 })
 
 // test related tasks
@@ -89,8 +94,8 @@ gulp.task('build:ts', () => {
     cache: {},
     packageCache: {}
   })
-  .plugin(tsify)
-  .bundle()
-  .pipe(source('bundle.js'))
-  .pipe(gulp.dest('dist/js'))
+    .plugin(tsify)
+    .bundle()
+    .pipe(source('bundle.js'))
+    .pipe(gulp.dest('dist/js'))
 })
