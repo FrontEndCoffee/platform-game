@@ -21,7 +21,7 @@ class App {
   }
 
   public update(): void {
-    let deltaTime = this.getTime() - this.latestFrameTimestamp
+    let deltaTime: number = this.getTime() - this.latestFrameTimestamp
     this.latestFrameTimestamp = this.getTime()
     this.physics.update(this.gameObjects, deltaTime)
     this.engine.clearFrame()
@@ -84,7 +84,7 @@ window.onload = () => {
     new Vector(10, 10),
     new Vector(10, 10)
   ))
-  let run = () => {
+  let run: any = () => {
     platformer.update()
     requestAnimationFrame(run)
   }
