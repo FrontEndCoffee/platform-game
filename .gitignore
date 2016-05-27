@@ -3,3 +3,6 @@ dist
 app/js
 npm-debug.log
 test/temp
+
+# Jetbrains folders
+**/.idea
