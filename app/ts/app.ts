@@ -11,10 +11,11 @@ class App {
   private gameObjects: GameObject[]
   private keysDown: number[]
   private latestFrameTimestamp: number
+  private settings: any
 
-
-  constructor(doc: any, height: number, width: number) {
-    this.engine = new RenderEngine(doc, height, width)
+  constructor(doc: any, height: number, width: number, settings: any) {
+    this.settings = settings
+    this.engine = new RenderEngine(doc, height, width, settings.display)
     this.physics = new PhysicsEngine()
     this.keysDown = []
     this.gameObjects = []
@@ -66,32 +67,26 @@ class App {
 // init code
 
 window.onload = () => {
-  let platformer: App = new App(
-    document,
-    window.innerHeight,
-    window.innerWidth
-  )
-  window.onkeydown = (e: any) => platformer.onKeyDown(e.keyCode)
-  window.onkeyup = (e: any) => platformer.onKeyUp(e.keyCode)
+  new DataFile('../res/settings.json', (settings: any) => {
+    let platformer: App = new App(
+      document,
+      window.innerHeight,
+      window.innerWidth,
+      settings
+    )
+    window.onkeydown = (e: any) => platformer.onKeyDown(e.keyCode)
+    window.onkeyup = (e: any) => platformer.onKeyUp(e.keyCode)
 
-  // debug code
-  platformer.addGameObject(new GameObject(
-    new Vector(10, 10),
-    new Vector(10, 10),
-    new Vector(10, 10)
-  ))
-  platformer.addGameObject(new GameObject(
-    new Vector(30, 10),
-    new Vector(10, 10),
-    new Vector(10, 10)
-  ))
-  let run: any = () => {
-    platformer.update()
-    requestAnimationFrame(run)
-  }
-  run()
-  let memes: DataFile = new DataFile('/res/test.json', (content: Object) => {
-    console.log(content)
+    platformer.addGameObject(new GameObject(
+      new Vector(10, 10),
+      new Vector(10, 10),
+      new Vector(10, 10)
+    ))
+
+    let run: any = () => {
+      platformer.update()
+      requestAnimationFrame(run)
+    }
+    run()
   })
-  console.log(memes)
 }

@@ -6,14 +6,22 @@ export class RenderEngine {
   private ctx: any
   private height: number
   private width: number
+  private settings: any
 
-  constructor(document: any, windowHeight: number, windowWidth: number) {
+  constructor(document: any, windowHeight: number, windowWidth: number, displaySettings: any) {
+    this.settings = displaySettings
     this.height = windowHeight
     this.width = windowWidth
     this.canvas = document.createElement('canvas')
     this.canvas.height = this.height
     this.canvas.width = this.width
     this.ctx = this.canvas.getContext('2d')
+    // config canvas
+    let scale = this.height / this.settings.height
+    this.ctx.translate(this.settings.margin , this.height)
+    console.log(scale, this.settings.height, this.height)
+    this.ctx.scale(scale, -scale)
+
     document.body.appendChild(this.canvas)
   }
 
