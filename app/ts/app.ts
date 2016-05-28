@@ -67,7 +67,7 @@ class App {
 // init code
 
 window.onload = () => {
-  new DataFile('../res/settings.json', (settings: any) => {
+  let settingsFile: DataFile = new DataFile('../res/settings.json', (settings: any) => {
     let platformer: App = new App(
       document,
       window.innerHeight,
@@ -89,4 +89,5 @@ window.onload = () => {
     }
     run()
   })
+  console.log(settingsFile)
 }
