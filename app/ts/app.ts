@@ -2,6 +2,7 @@ import { RenderEngine } from './RenderEngine'
 import { GameObject } from './GameObject'
 import { Vector } from './Vector'
 import { PhysicsEngine } from './PhysicsEngine'
+import { DataFile } from './DataFile'
 
 class App {
 
@@ -89,4 +90,8 @@ window.onload = () => {
     requestAnimationFrame(run)
   }
   run()
+  let memes: DataFile = new DataFile('/res/test.json', (content: Object) => {
+    console.log(content)
+  })
+  console.log(memes)
 }
