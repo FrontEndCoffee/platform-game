@@ -1,10 +1,8 @@
 import { RenderEngine } from './RenderEngine'
 import { GameObject } from './GameObject'
-import { Vector } from './Vector'
 import { PhysicsEngine } from './PhysicsEngine'
-import { DataFile } from './DataFile'
 
-class App {
+export class App {
 
   private engine: RenderEngine
   private physics: PhysicsEngine
@@ -62,31 +60,4 @@ class App {
     return new Date().getTime()
   }
 
-}
-
-// init code
-
-window.onload = () => {
-  new DataFile('../res/settings.json', (settings: any) => {
-    let platformer: App = new App(
-      document,
-      window.innerHeight,
-      window.innerWidth,
-      settings
-    )
-    window.onkeydown = (e: any) => platformer.onKeyDown(e.keyCode)
-    window.onkeyup = (e: any) => platformer.onKeyUp(e.keyCode)
-
-    platformer.addGameObject(new GameObject(
-      new Vector(10, 10),
-      new Vector(10, 10),
-      new Vector(10, 10)
-    ))
-
-    let run: any = () => {
-      platformer.update()
-      requestAnimationFrame(run)
-    }
-    run()
-  })
 }
