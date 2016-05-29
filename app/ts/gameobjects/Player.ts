@@ -5,8 +5,10 @@ import { KeyHandler } from '../KeyHandler'
 export class Player extends GameObject {
 
   private settings: any
+  private keyHandler: KeyHandler
+  private gameObjects: GameObject[]
 
-  constructor(settings) {
+  constructor(keyHandler: KeyHandler, gameObjects: GameObject[], settings) {
     super(
       new Vector(settings.position[0], settings.position[1]),
       new Vector(settings.velocity[0], settings.velocity[1]),
@@ -14,12 +16,14 @@ export class Player extends GameObject {
       settings.color
     )
     this.settings = settings
+    this.keyHandler = keyHandler
+    this.gameObjects = gameObjects
   }
 
-  public update(keyHandler: KeyHandler, time: number) {
-    let isFwrd = keyHandler.isKeyUp(keyHandler.KEY_FORWARDS)
-    let isBwrd = keyHandler.isKeyUp(keyHandler.KEY_BACKWARDS)
-    let isJump = keyHandler.isKeyUp(keyHandler.KEY_JUMP)
+  public update(time: number) {
+    let isFwrd = this.keyHandler.isKeyUp(this.keyHandler.KEY_FORWARDS)
+    let isBwrd = this.keyHandler.isKeyUp(this.keyHandler.KEY_BACKWARDS)
+    let isJump = this.keyHandler.isKeyUp(this.keyHandler.KEY_JUMP)
 
     if (isFwrd) {
       this.accelerate(new Vector(this.settings.lateralAcceleration, 0))
@@ -31,8 +35,23 @@ export class Player extends GameObject {
     this.move(time/1000)
   }
 
+  public move(time: number): void {
+    super.move(time)
+    if (Math.abs(this.velocity.getX()) < this.settings.lateralAcceleration) {
+      this.velocity.setX(0)
+    }
+    if (!this.keyHandler.isKeyUp(this.keyHandler.KEY_FORWARDS) &&
+        !this.keyHandler.isKeyUp(this.keyHandler.KEY_BACKWARDS) &&
+        this.velocity.getX() !== 0 ) {
+
+      let plusMinus = this.velocity.getX() / Math.abs(this.velocity.getX())
+      this.velocity.setX( this.velocity.getX() - this.settings.lateralAcceleration * plusMinus )
+      console.log(plusMinus)
+    }
+  }
+
   public accelerate(dVel: Vector): void {
-    this.velocity = this.velocity.add(dVel)
+    super.accelerate(dVel)
     if (Math.abs(this.velocity.getX()) > this.settings.maxLateralVelocity) {
       let plusMinus = Math.abs(this.velocity.getX()) / this.velocity.getX()
       this.velocity.setX(this.settings.maxLateralVelocity * plusMinus)

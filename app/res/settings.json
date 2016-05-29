@@ -8,8 +8,8 @@
     "position": [0,0],
     "velocity": [0,0],
     "color": "#bada55",
-    "lateralAcceleration": 10,
-    "maxLateralVelocity": 200,
+    "lateralAcceleration": 20,
+    "maxLateralVelocity": 400,
     "altitudinalAcceleration": 10,
     "maxAltitudinalVelocity": 20
   },

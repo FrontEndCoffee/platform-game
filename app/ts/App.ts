@@ -21,14 +21,14 @@ export class App {
     this.keyHandler = new KeyHandler(settings.keys)
     this.gameObjects = []
     this.latestFrameTimestamp = this.getTime()
-    this.player = new Player(settings.player)
+    this.player = new Player(this.keyHandler, this.gameObjects, settings.player)
   }
 
   public update(): void {
     let deltaTime: number = this.getTime() - this.latestFrameTimestamp
     this.latestFrameTimestamp = this.getTime()
     this.physics.update(this.gameObjects, deltaTime)
-    this.player.update(this.keyHandler, deltaTime)
+    this.player.update(deltaTime)
     this.engine.clearFrame()
     this.gameObjects.forEach((v: GameObject) => {
       this.engine.draw(v)
