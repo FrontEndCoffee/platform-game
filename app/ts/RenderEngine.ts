@@ -17,7 +17,7 @@ export class RenderEngine {
     this.canvas.width = this.width
     this.ctx = this.canvas.getContext('2d')
     // config canvas
-    let scale = this.height / this.settings.height
+    let scale: number = this.height / this.settings.height
     this.ctx.translate(this.settings.margin , this.height)
     console.log(scale, this.settings.height, this.height)
     this.ctx.scale(scale, -scale)
