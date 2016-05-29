@@ -26,6 +26,7 @@
     "gulp-tape": "0.0.9",
     "gulp-tslint": "^5.0.0",
     "gulp-typescript": "^2.13.4",
+    "gulp-webserver": "^0.9.1",
     "tap-colorize": "^1.2.0",
     "tape": "^4.5.1",
     "tsify": "^0.16.0",

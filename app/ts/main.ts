@@ -14,11 +14,18 @@ window.onload = () => {
     window.onkeydown = (e: any) => platformer.onKeyDown(e.keyCode)
     window.onkeyup = (e: any) => platformer.onKeyUp(e.keyCode)
 
-    platformer.addGameObject(new GameObject(
-      new Vector(10, 10),
-      new Vector(10, 10),
-      new Vector(10, 10)
-    ))
+    console.log(new DataFile('../res/levelfile.json', (levelfile: any) => {
+      levelfile.gameObjects.map((obj: any) => {
+        platformer.addGameObject(
+          new GameObject(
+            new Vector(obj[0], obj[1]),
+            new Vector(obj[2], obj[3]),
+            new Vector(obj[4], obj[5]),
+            obj[6]
+          )
+        )
+      })
+    }))
 
     let run: any = () => {
       platformer.update()

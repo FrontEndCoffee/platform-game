@@ -7,11 +7,11 @@ export class GameObject {
   private size: Vector
   private color: string
 
-  constructor(position: Vector, velocity: Vector, size: Vector) {
+  constructor(position: Vector, velocity: Vector, size: Vector, color: string) {
     this.position = position || new Vector(0, 0)
     this.velocity = velocity || new Vector(0, 0)
     this.size = size || new Vector(5, 5)
-    this.color = '#f00'
+    this.color = color || '#f00'
   }
 
   public move(seconds: number): void {
