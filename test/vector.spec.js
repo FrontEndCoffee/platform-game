@@ -1,3 +1,5 @@
+'use strict'
+
 var test = require('tape')
 var Vector = require('./temp/Vector').Vector
 

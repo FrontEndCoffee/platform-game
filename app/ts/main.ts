@@ -4,7 +4,7 @@ import { Vector } from './Vector'
 import { DataFile } from './DataFile'
 
 window.onload = () => {
-  new DataFile('../res/settings.json', (settings: any) => {
+  console.log(new DataFile('../res/settings.json', (settings: any) => {
     let platformer: App = new App(
       document,
       window.innerHeight,
@@ -25,5 +25,5 @@ window.onload = () => {
       requestAnimationFrame(run)
     }
     run()
-  })
+  }))
 }

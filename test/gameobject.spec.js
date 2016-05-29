@@ -1,3 +1,5 @@
+'use strict'
+
 var test = require('tape')
 var GameObject = require('./temp/GameObject').GameObject
 var Vector = require('./temp/Vector').Vector
