@@ -8,10 +8,10 @@
     "position": [0,0],
     "velocity": [0,0],
     "color": "#bada55",
-    "lateralAcceleration": 50,
-    "maxLateralVelocity": 100,
-    "altitudinalAcceleration": 200,
-    "maxAltitudinalVelocity": 300
+    "lateralAcceleration": 10,
+    "maxLateralVelocity": 200,
+    "altitudinalAcceleration": 10,
+    "maxAltitudinalVelocity": 20
   },
   "keys": {
     "forwards": 39,
