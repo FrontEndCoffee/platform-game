@@ -90,7 +90,7 @@ gulp.task('build:ts', () => {
   return browserify({
     baseDir: '.',
     debug: false,
-    entries: ['app/ts/app.ts'],
+    entries: ['app/ts/main.ts'],
     cache: {},
     packageCache: {}
   })
