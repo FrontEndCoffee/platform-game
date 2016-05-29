@@ -2,5 +2,20 @@
   "display": {
     "height": 1000,
     "margin": 100
+  },
+  "player": {
+    "size": [100,100],
+    "position": [0,0],
+    "velocity": [0,0],
+    "color": "#bada55",
+    "lateralAcceleration": 50,
+    "maxLateralVelocity": 100,
+    "altitudinalAcceleration": 200,
+    "maxAltitudinalVelocity": 300
+  },
+  "keys": {
+    "forwards": 39,
+    "backwards": 37,
+    "jump": 38
   }
 }
