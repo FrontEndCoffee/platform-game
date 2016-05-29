@@ -8,15 +8,24 @@ var del = require('del')
 var typescript = require('gulp-typescript')
 var tape = require('gulp-tape')
 var tapColorize = require('tap-colorize')
+var webserver = require('gulp-webserver')
 
 // development related tasks
 
 gulp.task('default', (callback) => {
-  seq('ts', callback)
+  seq(['webserver', 'watch'], callback)
 })
 
 gulp.task('watch', ['ts'], () => {
   gulp.watch('app/ts/**/*.ts', ['ts'])
+})
+
+gulp.task('webserver', () => {
+  gulp.src('app')
+    .pipe(webserver({
+      livereload: true,
+      open: true
+    }))
 })
 
 gulp.task('ts', () => {
