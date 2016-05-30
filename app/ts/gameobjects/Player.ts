@@ -31,6 +31,9 @@ export class Player extends GameObject {
     if (isBwrd) {
       this.accelerate(new Vector(-this.settings.lateralAcceleration, 0))
     }
+    if (isJump && !this.isFlying()) {
+      this.accelerate(new Vector(0, this.settings.altitudinalAcceleration))
+    }
 
     this.move(time/1000)
   }
@@ -46,8 +49,18 @@ export class Player extends GameObject {
 
       let plusMinus = this.velocity.getX() / Math.abs(this.velocity.getX())
       this.velocity.setX( this.velocity.getX() - this.settings.lateralAcceleration * plusMinus )
-      console.log(plusMinus)
     }
+
+    // gravity
+    this.accelerate(new Vector(0, -this.settings.gravity))
+
+    // solid check
+    let bottomPos = (this.position.getY() - this.size.getY()/2)
+    if (bottomPos < 0) {
+      this.position.setY( this.size.getY()/2 )
+      this.velocity.setY(0)
+    }
+
   }
 
   public accelerate(dVel: Vector): void {
@@ -59,7 +72,13 @@ export class Player extends GameObject {
     if (Math.abs(this.velocity.getY()) > this.settings.maxAltitudinalVelocity) {
       let factor = Math.abs(this.velocity.getY()) / this.settings.maxAltitudinalVelocity
       this.velocity.setY(this.velocity.getY() / factor)
+
+
     }
 
+  }
+
+  private isFlying(): boolean {
+    return (this.position.getY() - this.size.getY()/2) >= 0
   }
 }

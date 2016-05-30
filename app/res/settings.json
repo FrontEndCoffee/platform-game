@@ -10,8 +10,9 @@
     "color": "#bada55",
     "lateralAcceleration": 20,
     "maxLateralVelocity": 400,
-    "altitudinalAcceleration": 10,
-    "maxAltitudinalVelocity": 20
+    "altitudinalAcceleration": 100,
+    "maxAltitudinalVelocity": 200,
+    "gravity": 50
   },
   "keys": {
     "forwards": 39,

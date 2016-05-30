@@ -18,8 +18,11 @@ export class RenderEngine {
     this.ctx = this.canvas.getContext('2d')
     // config canvas
     let scale: number = this.height / this.settings.height
+
     this.ctx.translate(this.settings.margin , this.height)
     this.ctx.scale(scale, -scale)
+    this.height *= scale
+    this.width *= scale
 
     document.body.appendChild(this.canvas)
   }
@@ -27,15 +30,15 @@ export class RenderEngine {
   public draw(obj: GameObject): void {
     this.ctx.fillStyle = obj.getColor()
     this.ctx.fillRect(
-      obj.getPosition().getX(),
-      obj.getPosition().getY(),
+      obj.getPosition().getX() - obj.getSize().getX()/2,
+      obj.getPosition().getY() - obj.getSize().getY()/2,
       obj.getSize().getX(),
       obj.getSize().getY()
     )
   }
 
   public clearFrame(): void {
-    this.ctx.clearRect(0, 0, this.width, this.height)
+    this.ctx.clearRect(-this.settings.margin, 0, this.width, this.height)
   }
 
   public getHeight(): number {
