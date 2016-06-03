@@ -31,7 +31,7 @@ export class Player extends GameObject {
     if (isBwrd) {
       this.accelerate(new Vector(-this.settings.lateralAcceleration, 0))
     }
-    if (isJump && !this.isFlying()) {
+    if (isJump) {
       this.accelerate(new Vector(0, this.settings.altitudinalAcceleration))
     }
 
@@ -69,12 +69,12 @@ export class Player extends GameObject {
       let plusMinus = Math.abs(this.velocity.getX()) / this.velocity.getX()
       this.velocity.setX(this.settings.maxLateralVelocity * plusMinus)
     }
-    if (Math.abs(this.velocity.getY()) > this.settings.maxAltitudinalVelocity) {
-      let factor = Math.abs(this.velocity.getY()) / this.settings.maxAltitudinalVelocity
-      this.velocity.setY(this.velocity.getY() / factor)
-
-
-    }
+    // if (Math.abs(this.velocity.getY()) > this.settings.maxAltitudinalVelocity) {
+    //   let factor = Math.abs(this.velocity.getY()) / this.settings.maxAltitudinalVelocity
+    //   this.velocity.setY(this.velocity.getY() / factor)
+    //
+    //
+    // }
 
   }
 
