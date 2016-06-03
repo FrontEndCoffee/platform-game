@@ -30,8 +30,8 @@ export class RenderEngine {
   public draw(obj: GameObject): void {
     this.ctx.fillStyle = obj.getColor()
     this.ctx.fillRect(
-      obj.getPosition().getX() - obj.getSize().getX()/2,
-      obj.getPosition().getY() - obj.getSize().getY()/2,
+      obj.getPosition().getX() - obj.getSize().getX() / 2,
+      obj.getPosition().getY() - obj.getSize().getY() / 2,
       obj.getSize().getX(),
       obj.getSize().getY()
     )

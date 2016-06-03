@@ -1,13 +1,13 @@
 export class KeyHandler {
 
-  private settings: any
-  private keysDown: number[]
-
   public KEY_FORWARDS: number
   public KEY_BACKWARDS: number
   public KEY_JUMP: number
 
-  constructor(settings) {
+  private settings: any
+  private keysDown: number[]
+
+  constructor(settings: any) {
     this.settings = settings
     this.keysDown = []
     this.KEY_FORWARDS = settings.forwards

@@ -8,7 +8,7 @@ export class Player extends GameObject {
   private keyHandler: KeyHandler
   private gameObjects: GameObject[]
 
-  constructor(keyHandler: KeyHandler, gameObjects: GameObject[], settings) {
+  constructor(keyHandler: KeyHandler, gameObjects: GameObject[], settings: any) {
     super(
       new Vector(settings.position[0], settings.position[1]),
       new Vector(settings.velocity[0], settings.velocity[1]),
@@ -20,10 +20,10 @@ export class Player extends GameObject {
     this.gameObjects = gameObjects
   }
 
-  public update(time: number) {
-    let isFwrd = this.keyHandler.isKeyUp(this.keyHandler.KEY_FORWARDS)
-    let isBwrd = this.keyHandler.isKeyUp(this.keyHandler.KEY_BACKWARDS)
-    let isJump = this.keyHandler.isKeyUp(this.keyHandler.KEY_JUMP)
+  public update(time: number): void {
+    let isFwrd: boolean = this.keyHandler.isKeyUp(this.keyHandler.KEY_FORWARDS)
+    let isBwrd: boolean = this.keyHandler.isKeyUp(this.keyHandler.KEY_BACKWARDS)
+    let isJump: boolean = this.keyHandler.isKeyUp(this.keyHandler.KEY_JUMP)
 
     if (isFwrd) {
       this.accelerate(new Vector(this.settings.lateralAcceleration, 0))
@@ -35,7 +35,7 @@ export class Player extends GameObject {
       this.accelerate(new Vector(0, this.settings.altitudinalAcceleration))
     }
 
-    this.move(time/1000)
+    this.move(time / 1000)
   }
 
   public move(time: number): void {
@@ -47,7 +47,7 @@ export class Player extends GameObject {
         !this.keyHandler.isKeyUp(this.keyHandler.KEY_BACKWARDS) &&
         this.velocity.getX() !== 0 ) {
 
-      let plusMinus = this.velocity.getX() / Math.abs(this.velocity.getX())
+      let plusMinus: number = this.velocity.getX() / Math.abs(this.velocity.getX())
       this.velocity.setX( this.velocity.getX() - this.settings.lateralAcceleration * plusMinus )
     }
 
@@ -55,9 +55,9 @@ export class Player extends GameObject {
     this.accelerate(new Vector(0, -this.settings.gravity))
 
     // solid check
-    let bottomPos = (this.position.getY() - this.size.getY()/2)
+    let bottomPos: number = (this.position.getY() - this.size.getY() / 2)
     if (bottomPos < 0) {
-      this.position.setY( this.size.getY()/2 )
+      this.position.setY( this.size.getY() / 2)
       this.velocity.setY(0)
     }
 
@@ -66,11 +66,11 @@ export class Player extends GameObject {
   public accelerate(dVel: Vector): void {
     super.accelerate(dVel)
     if (Math.abs(this.velocity.getX()) > this.settings.maxLateralVelocity) {
-      let plusMinus = Math.abs(this.velocity.getX()) / this.velocity.getX()
+      let plusMinus: number = Math.abs(this.velocity.getX()) / this.velocity.getX()
       this.velocity.setX(this.settings.maxLateralVelocity * plusMinus)
     }
     if (Math.abs(this.velocity.getY()) > this.settings.maxAltitudinalVelocity) {
-      let factor = Math.abs(this.velocity.getY()) / this.settings.maxAltitudinalVelocity
+      let factor: number = Math.abs(this.velocity.getY()) / this.settings.maxAltitudinalVelocity
       this.velocity.setY(this.velocity.getY() / factor)
 
 
@@ -79,6 +79,6 @@ export class Player extends GameObject {
   }
 
   private isFlying(): boolean {
-    return (this.position.getY() - this.size.getY()/2) > 0
+    return (this.position.getY() - this.size.getY() / 2) > 0
   }
 }
