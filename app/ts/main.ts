@@ -4,17 +4,17 @@ import { Vector } from './Vector'
 import { DataFile } from './DataFile'
 
 window.onload = () => {
-  console.log(new DataFile('../res/settings.json', (settings: any) => {
+  new DataFile('../res/settings.json', (settings: any) => {
     let platformer: App = new App(
       document,
       window.innerHeight,
       window.innerWidth,
       settings
     )
-    window.onkeydown = (e: any) => platformer.onKeyDown(e.keyCode)
-    window.onkeyup = (e: any) => platformer.onKeyUp(e.keyCode)
+    window.onkeydown = (e: any) => platformer.getKeyHandler().onKeyDown(e.keyCode)
+    window.onkeyup = (e: any) => platformer.getKeyHandler().onKeyUp(e.keyCode)
 
-    console.log(new DataFile('../res/levelfile.json', (levelfile: any) => {
+    new DataFile('../res/levelfile.json', (levelfile: any) => {
       levelfile.gameObjects.map((obj: any) => {
         platformer.addGameObject(
           new GameObject(
@@ -25,12 +25,12 @@ window.onload = () => {
           )
         )
       })
-    }))
+    })
 
     let run: any = () => {
       platformer.update()
       requestAnimationFrame(run)
     }
     run()
-  }))
+  })
 }

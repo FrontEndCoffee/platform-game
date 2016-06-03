@@ -2,10 +2,10 @@ import { Vector } from './Vector'
 
 export class GameObject {
 
-  private position: Vector
-  private velocity: Vector
-  private size: Vector
-  private color: string
+  protected position: Vector
+  protected velocity: Vector
+  protected size: Vector
+  protected color: string
 
   constructor(position: Vector, velocity: Vector, size: Vector, color: string) {
     this.position = position || new Vector(0, 0)
