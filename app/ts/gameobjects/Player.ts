@@ -20,6 +20,10 @@ export class Player extends GameObject {
     this.gameObjects = gameObjects
   }
 
+  /**
+   * Updates the player object, processes user input
+   * @time  time for which to calculate physics in milliseconds
+   */
   public update(time: number): void {
     let isFwrd: boolean = this.keyHandler.isKeyDown(this.keyHandler.KEY_FORWARDS)
     let isBwrd: boolean = this.keyHandler.isKeyDown(this.keyHandler.KEY_BACKWARDS)
@@ -38,6 +42,10 @@ export class Player extends GameObject {
     this.move(time / 1000)
   }
 
+  /**
+   * Processes physics over the given time, overrides the supers move method
+   * @param time    time in seconds over which physics are calculated
+   */
   public move(time: number): void {
     super.move(time)
     if (Math.abs(this.velocity.getX()) < this.settings.lateralAcceleration) {
@@ -63,6 +71,11 @@ export class Player extends GameObject {
 
   }
 
+  /**
+   * Overwrites the inherited accelerate method, but includes velocity physics.
+   * changes the speed of the current GameObject
+   * @dVel   The vector with which the current GameObject must be changed
+   */
   public accelerate(dVel: Vector): void {
     super.accelerate(dVel)
     if (Math.abs(this.velocity.getX()) > this.settings.maxLateralVelocity) {
@@ -72,12 +85,13 @@ export class Player extends GameObject {
     if (Math.abs(this.velocity.getY()) > this.settings.maxAltitudinalVelocity) {
       let factor: number = Math.abs(this.velocity.getY()) / this.settings.maxAltitudinalVelocity
       this.velocity.setY(this.velocity.getY() / factor)
-
-
     }
-
   }
 
+  /**
+   * Returns whether the current player object is flying or not
+   * @return  is player flying
+   */
   private isFlying(): boolean {
     return (this.position.getY() - this.size.getY() / 2) > 0
   }

@@ -30,6 +30,10 @@ export class RenderEngine {
     document.body.appendChild(this.canvas)
   }
 
+  /**
+   * Renders a GameObject on the canvas
+   * @param obj   Game object that is to be rendered on the canvas
+   */
   public draw(obj: GameObject): void {
     this.ctx.fillStyle = obj.getColor()
     this.ctx.fillRect(
@@ -40,6 +44,9 @@ export class RenderEngine {
     )
   }
 
+  /**
+   * Clears the entire canvas of all visuals, is supposed to be called at the start of each frame
+   */
   public clearFrame(): void {
     this.ctx.clearRect(-this.margin, 0, this.width, this.height)
   }

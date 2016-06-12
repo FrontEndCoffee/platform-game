@@ -2,8 +2,6 @@ import { GameObject } from './GameObject'
 
 export class PhysicsEngine {
 
-  // private static GRAVITY: number = 9.81
-
   /**
    * Processes the movement of all the given gameobjects over the given time
    * @param gameObjects   An array of the to be processed GameObjects
