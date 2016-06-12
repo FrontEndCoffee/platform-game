@@ -12,16 +12,16 @@ export class PhysicsEngine {
   }
 
   public isHit(a: GameObject, b: GameObject): boolean {
-    let aMaxX = a.getPosition().getX() + a.getSize().getX() / 2
-    let aMinX = a.getPosition().getX() - a.getSize().getX() / 2
-    let aMaxY = a.getPosition().getY() + a.getSize().getY() / 2
-    let aMinY = a.getPosition().getY() - a.getSize().getY() / 2
+    let aMaxX: number = a.getPosition().getX() + a.getSize().getX() / 2
+    let aMinX: number = a.getPosition().getX() - a.getSize().getX() / 2
+    let aMaxY: number = a.getPosition().getY() + a.getSize().getY() / 2
+    let aMinY: number = a.getPosition().getY() - a.getSize().getY() / 2
 
-    let bMaxX = b.getPosition().getX() + b.getSize().getX() / 2
-    let bMinX = b.getPosition().getX() - b.getSize().getX() / 2
-    let bMaxY = b.getPosition().getY() + b.getSize().getY() / 2
-    let bMinY = b.getPosition().getY() - b.getSize().getY() / 2
-    
+    let bMaxX: number = b.getPosition().getX() + b.getSize().getX() / 2
+    let bMinX: number = b.getPosition().getX() - b.getSize().getX() / 2
+    let bMaxY: number = b.getPosition().getY() + b.getSize().getY() / 2
+    let bMinY: number = b.getPosition().getY() - b.getSize().getY() / 2
+
     return (
       (
         ((aMaxX > bMinX) && (bMaxX > aMinX)) ||
