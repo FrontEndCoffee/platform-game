@@ -6,12 +6,14 @@ export class RenderEngine {
   private ctx: any
   private height: number
   private width: number
+  private margin: number
   private settings: any
 
   constructor(document: any, windowHeight: number, windowWidth: number, displaySettings: any) {
     this.settings = displaySettings
     this.height = windowHeight
     this.width = windowWidth
+    this.margin = this.settings.margin
     this.canvas = document.createElement('canvas')
     this.canvas.height = this.height
     this.canvas.width = this.width
@@ -21,8 +23,9 @@ export class RenderEngine {
 
     this.ctx.translate(this.settings.margin , this.height)
     this.ctx.scale(scale, -scale)
-    this.height *= scale
-    this.width *= scale
+    this.height /= scale
+    this.width /= scale
+    this.margin /= scale
 
     document.body.appendChild(this.canvas)
   }
@@ -38,7 +41,7 @@ export class RenderEngine {
   }
 
   public clearFrame(): void {
-    this.ctx.clearRect(-this.settings.margin, 0, this.width, this.height)
+    this.ctx.clearRect(-this.margin, 0, this.width, this.height)
   }
 
   public getHeight(): number {
