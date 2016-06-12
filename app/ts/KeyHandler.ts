@@ -15,6 +15,10 @@ export class KeyHandler {
     this.KEY_JUMP = settings.jump
   }
 
+  /**
+   * Registers the press of a key
+   * @key   Registers this key as pressed
+   */
   public onKeyDown(key: number): void {
     let indexOfKey: number = this.keysDown.indexOf(key)
     if (indexOfKey === -1) {
@@ -22,6 +26,10 @@ export class KeyHandler {
     }
   }
 
+  /**
+   * Registers the release of a key
+   * @key   Registers this key as released
+   */
   public onKeyUp(key: number): void {
     let indexOfKey: number = this.keysDown.indexOf(key)
     if (indexOfKey > -1) {
@@ -29,6 +37,10 @@ export class KeyHandler {
     }
   }
 
+  /**
+   * Returns wheter a key is being held down since the inception of this instance
+   * @param   What key to return the hold-down state of
+   */
   public isKeyDown(key: number): boolean {
     return (this.keysDown.indexOf(key) >= 0)
   }

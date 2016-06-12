@@ -16,6 +16,11 @@ export class DataFile {
     request.send()
   }
 
+  /**
+   * Returns the file extention of the filename in the given string
+   * @param file  File name
+   * @return      File extention of the given file name
+   */
   private getFileType(file: string): string {
     let temp: string[] = file.split('.')
     if (temp.length < 2) {
@@ -24,17 +29,27 @@ export class DataFile {
     return temp[temp.length - 1].toLowerCase()
   }
 
+  /**
+   * Callback function that gets called when the file has been loaded
+   * @param file    XMLHttpRequest event object
+   * @param context The scope of the current DataFile instance
+   */
   private onDataFileLoaded(file: any, context: DataFile): void {
-    context.fileContents = context.parseDataFile(file.target.responseText)
+    context.fileContents = context.parseDataFile(file.target.responseText, this.fileType)
     context.callback(context.fileContents)
   }
 
-  private parseDataFile(rawFileContents: string): any {
-    switch (this.fileType) {
+  /**
+   * Parses raw file contents if the filetype is known, if not, it will return the raw file contents
+   * @param rawFileContents   Plain text file contents, to be parsed by this method
+   * @param fileType          File extention   
+   */
+  private parseDataFile(rawFileContents: string, fileType: string): any {
+    switch (fileType.toLowerCase()) {
       case 'json':
-      return JSON.parse(rawFileContents)
+        return JSON.parse(rawFileContents)
       default:
-      return rawFileContents
+        return rawFileContents
     }
   }
 

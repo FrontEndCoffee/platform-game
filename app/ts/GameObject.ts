@@ -14,16 +14,28 @@ export class GameObject {
     this.color = color || '#f00'
   }
 
+  /**
+   * Calculates movement of the current GameObject over the given time in seconds
+   * @seconds   Time in which the movement must be calculated in seconds
+   */
   public move(seconds: number): void {
     this.position = this.position.add(
       this.velocity.scale(seconds)
     )
   }
 
+  /**
+   * Changes the speed of the current GameObject
+   * @dVel   The vector with which the current GameObject must be changed
+   */
   public accelerate(dVel: Vector): void {
     this.velocity = this.velocity.add(dVel)
   }
 
+  /**
+   * Translates the current GameObject
+   * @dPos  The vector with which the current GameObject must be translated
+   */
   public translate(dPos: Vector): void {
     this.position = this.position.add(dPos)
   }
