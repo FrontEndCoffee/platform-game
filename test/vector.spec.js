@@ -1,7 +1,7 @@
 'use strict'
 
-var test = require('tape')
-var Vector = require('./temp/Vector').Vector
+let test = require('tape')
+let Vector = require('./temp/Vector').Vector
 
 test('Vector', assert => {
 

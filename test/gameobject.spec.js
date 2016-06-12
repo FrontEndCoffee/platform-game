@@ -1,8 +1,8 @@
 'use strict'
 
-var test = require('tape')
-var GameObject = require('./temp/GameObject').GameObject
-var Vector = require('./temp/Vector').Vector
+let test = require('tape')
+let GameObject = require('./temp/GameObject').GameObject
+let Vector = require('./temp/Vector').Vector
 
 test('GameObject', assert => {
 

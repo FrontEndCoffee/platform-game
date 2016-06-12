@@ -21,9 +21,9 @@ export class Player extends GameObject {
   }
 
   public update(time: number): void {
-    let isFwrd: boolean = this.keyHandler.isKeyUp(this.keyHandler.KEY_FORWARDS)
-    let isBwrd: boolean = this.keyHandler.isKeyUp(this.keyHandler.KEY_BACKWARDS)
-    let isJump: boolean = this.keyHandler.isKeyUp(this.keyHandler.KEY_JUMP)
+    let isFwrd: boolean = this.keyHandler.isKeyDown(this.keyHandler.KEY_FORWARDS)
+    let isBwrd: boolean = this.keyHandler.isKeyDown(this.keyHandler.KEY_BACKWARDS)
+    let isJump: boolean = this.keyHandler.isKeyDown(this.keyHandler.KEY_JUMP)
 
     if (isFwrd) {
       this.accelerate(new Vector(this.settings.lateralAcceleration, 0))
@@ -43,8 +43,8 @@ export class Player extends GameObject {
     if (Math.abs(this.velocity.getX()) < this.settings.lateralAcceleration) {
       this.velocity.setX(0)
     }
-    if (!this.keyHandler.isKeyUp(this.keyHandler.KEY_FORWARDS) &&
-        !this.keyHandler.isKeyUp(this.keyHandler.KEY_BACKWARDS) &&
+    if (!this.keyHandler.isKeyDown(this.keyHandler.KEY_FORWARDS) &&
+        !this.keyHandler.isKeyDown(this.keyHandler.KEY_BACKWARDS) &&
         this.velocity.getX() !== 0 ) {
 
       let plusMinus: number = this.velocity.getX() / Math.abs(this.velocity.getX())

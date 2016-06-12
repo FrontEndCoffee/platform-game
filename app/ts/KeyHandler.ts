@@ -29,7 +29,7 @@ export class KeyHandler {
     }
   }
 
-  public isKeyUp(key: number): boolean {
+  public isKeyDown(key: number): boolean {
     return (this.keysDown.indexOf(key) >= 0)
   }
 

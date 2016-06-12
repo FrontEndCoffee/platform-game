@@ -7,7 +7,6 @@ import { KeyHandler } from './KeyHandler'
 export class App {
 
   private engine: RenderEngine
-  private physics: PhysicsEngine
   private gameObjects: GameObject[]
   private keyHandler: KeyHandler
   private latestFrameTimestamp: number
@@ -17,7 +16,6 @@ export class App {
   constructor(doc: any, height: number, width: number, settings: any) {
     this.settings = settings
     this.engine = new RenderEngine(doc, height, width, settings.display)
-    this.physics = new PhysicsEngine()
     this.keyHandler = new KeyHandler(settings.keys)
     this.gameObjects = []
     this.latestFrameTimestamp = this.getTime()
@@ -27,7 +25,7 @@ export class App {
   public update(): void {
     let deltaTime: number = this.getTime() - this.latestFrameTimestamp
     this.latestFrameTimestamp = this.getTime()
-    this.physics.update(this.gameObjects, deltaTime)
+    PhysicsEngine.update(this.gameObjects, deltaTime)
     this.player.update(deltaTime)
     this.engine.clearFrame()
     this.gameObjects.forEach((v: GameObject) => {

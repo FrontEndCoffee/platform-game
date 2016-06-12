@@ -4,14 +4,25 @@ export class PhysicsEngine {
 
   // private static GRAVITY: number = 9.81
 
-  public update(gameObjects: GameObject[], deltaTime: number): void {
+  /**
+   * Processes the movement of all the given gameobjects over the given time
+   * @param gameObjects   An array of the to be processed GameObjects
+   * @param deltaTime     Timeframe for which to calculate physics (in milliseconds) 
+   */
+  public static update(gameObjects: GameObject[], deltaTime: number): void {
     let dt: number = deltaTime / 1000
     gameObjects.map((gameObject: GameObject) => {
       gameObject.move(dt)
     })
   }
 
-  public isHit(a: GameObject, b: GameObject): boolean {
+  /**
+   * `isHit` compares two GameObjects and returns if they are overlapping (hit detection)
+   * @param a   GameObject  you want to compare to b
+   * @param b   GameObject  you want to compare to a
+   * @return    boolean     do the given GameObjects overlap?
+   */
+  public static isHit(a: GameObject, b: GameObject): boolean {
     let aMaxX: number = a.getPosition().getX() + a.getSize().getX() / 2
     let aMinX: number = a.getPosition().getX() - a.getSize().getX() / 2
     let aMaxY: number = a.getPosition().getY() + a.getSize().getY() / 2
