@@ -17,8 +17,8 @@ export class DataFile {
         request.send()
     }
 
-    public getData(): JSON {
-        return this.data
+    public getData(key: string): JSON {
+        return this.data[key]
     }
 
     private onDataFileLoad(response: DataFileEventTarget, context: DataFile): void {
