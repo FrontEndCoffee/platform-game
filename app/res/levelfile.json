@@ -1,5 +1,17 @@
 {
-  "gameObjects": [
-    [200,100,10,0,150,50,"#333"]
+  "creator": "Jesse Kramer",
+  "levels": [
+    {
+      "levelName": "test",
+      "gameObjects": [
+        [200,100,10,0,150,50,"#333"]
+      ]
+    },
+    {
+      "levelName": "test2",
+      "gameObjects": [
+        [200,100,10,150,150,50,"#333"]
+      ]
+    }
   ]
 }

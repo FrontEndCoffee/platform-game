@@ -1,10 +1,10 @@
 import { Vector } from '../physics/Vector'
-import { Canvas } from './Canvas'
+import { Texture } from './Texture'
 
 export interface Drawable {
     position: Vector
     size: Vector
-    color: string
+    texture: Texture
 
-    draw(canvas: Canvas): void
+    draw(context: CanvasRenderingContext2D): void
 }
