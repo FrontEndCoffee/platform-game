@@ -10,11 +10,11 @@ export class Canvas {
     private canvasElement: HTMLCanvasElement
     private renderingContext: CanvasRenderingContext2D
 
-    constructor(context: Window, settings: DataFile) {
+    constructor(context: Window, settings: any) {
 
-        let displaySettings: JSON = settings['display']
+        let displaySettings: JSON = settings.getData('display')
         let physicalHeight: number = context.innerHeight
-        let physicalWidth : number= context.innerWidth
+        let physicalWidth : number = context.innerWidth
         let virtualHeight: number = displaySettings['height']
         let scale: number = virtualHeight / physicalHeight
         let virtualWidth: number = physicalWidth * scale
@@ -26,8 +26,13 @@ export class Canvas {
         this.canvasElement = context.document.createElement('canvas')
         this.canvasElement.height = this.physicalResolution.getY()
         this.canvasElement.width = this.physicalResolution.getX()
+
+        window.document.body.appendChild(this.canvasElement)
+
         this.renderingContext = this.canvasElement.getContext('2d')
-        this.renderingContext.scale(scale, scale)
+        this.renderingContext.scale(1 / scale, 1 / scale)
+        this.renderingContext.translate(0, this.virtualResolution.getY())
+        this.renderingContext.scale(1, -1)
     }
 
     public clearFrame(): void {
@@ -42,6 +47,10 @@ export class Canvas {
 
     public getVirtualResolution(): Vector {
         return this.virtualResolution
+    }
+
+    public getRenderingContext(): CanvasRenderingContext2D {
+        return this.renderingContext
     }
     
 }

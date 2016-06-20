@@ -13,6 +13,8 @@ export class PlatformEntity extends Entity implements Platform {
     velocity: Vector
     size: Vector
     texture: ColorTexture
+    isDrawable: boolean = true
+    hasPhysics: boolean = true
 
     constructor(position: Vector, velocity: Vector, size: Vector, color: string) {
         super()
