@@ -2,12 +2,12 @@ import { DataFile } from './DataFile'
 
 export class KeyHandler {
 
-    public keyForwards: number
-    public keyBackwards: number
-    public keyJump: number
+    public keyForwards: string
+    public keyBackwards: string
+    public keyJump: string
 
     private settings: JSON
-    private keysDown: number[]
+    private keysDown: string[]
 
   constructor(settings: any) {
     this.settings = settings.getData("keys")
@@ -18,24 +18,28 @@ export class KeyHandler {
   }
 
   /**
-   * Registers the press of a key
-   * @key   Registers this key as pressed
+   * Acts according to the given keyboard event type
+   * @param event   Event data from keyboard event
    */
-  public onKeyDown(key: number): void {
-    let indexOfKey: number = this.keysDown.indexOf(key)
-    if (indexOfKey === -1) {
-      this.keysDown.push(key)
-    }
-  }
+  public onKeyEvent(event: KeyboardEvent): void {
+    let key: string = event.key
+    let index: number = this.keysDown.indexOf(key)
+    switch (event.type) {
 
-  /**
-   * Registers the release of a key
-   * @key   Registers this key as released
-   */
-  public onKeyUp(key: number): void {
-    let indexOfKey: number = this.keysDown.indexOf(key)
-    if (indexOfKey > -1) {
-      this.keysDown.splice(indexOfKey, 1)
+      case 'keyup':
+        if (index > -1) {
+          this.keysDown.splice(index, 1)
+        }
+        break
+
+      case 'keydown':
+        if (index === -1) {
+          this.keysDown.push(key)
+        }
+        break
+
+      default:
+        throw 'unknown keyevent: ' + event.type 
     }
   }
 
@@ -43,7 +47,7 @@ export class KeyHandler {
    * Returns wheter a key is being held down since the inception of this instance
    * @param   What key to return the hold-down state of
    */
-  public isKeyDown(key: number): boolean {
+  public isKeyDown(key: string): boolean {
     return (this.keysDown.indexOf(key) >= 0)
   }
 
