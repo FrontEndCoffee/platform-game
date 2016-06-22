@@ -42,6 +42,10 @@ export class Level {
       return this.entities[id]
   }
 
+  public getPlayer(): PlayerEntity {
+    return this.player
+  }
+
   public updateEntity(id: number, entity: Entity): void {
       if (id >= this.entities.length) {
           throw 'entity with key ' + id + ' does not exist'

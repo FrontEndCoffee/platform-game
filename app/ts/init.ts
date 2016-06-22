@@ -4,16 +4,24 @@ import { Level } from './universe/Level'
 import { Canvas } from './graphics/Canvas'
 import { IDrawable } from './graphics/IDrawable'
 import { KeyHandler } from './main/KeyHandler'
+import { DebugMonitor } from './main/DebugMonitor'
 
 
 let settingsFile: DataFile = new DataFile('../res/settings.json', function(): void {
   let levelFile: DataFile = new DataFile('../res/levelfile.json', function(): void {
 
     let world: World = new World(levelFile, settingsFile)
-    let currentlevel: Level = world.getLevel(0)
+    let currentLevel: Level = world.getLevel(0)
     let canvas: Canvas = new Canvas(window, settingsFile)
     let keyHandler: KeyHandler = new KeyHandler(settingsFile)
     let timestamp: number = +new Date()
+    let debugMonitor: DebugMonitor = new DebugMonitor(window)
+
+    debugMonitor.createField('fps')
+    debugMonitor.createField('player_x')
+    debugMonitor.createField('player_y')
+
+    setInterval((_: any) => debugMonitor.renderDebugElement(), 400)
 
     // rendering loop
     let drawFrame: any = () => {
@@ -22,14 +30,22 @@ let settingsFile: DataFile = new DataFile('../res/settings.json', function(): vo
       let frameTime: number = newTimestamp - timestamp
       timestamp = newTimestamp
 
-      // clear previous frame
-      canvas.clearFrame()
+      // debug monitor
+      debugMonitor.updateField('fps', Math.round(1000 / frameTime).toString())
+      debugMonitor.updateField('player_x', currentLevel.getPlayer().getPosition().getX().toString())
+      debugMonitor.updateField('player_y', currentLevel.getPlayer().getPosition().getY().toString())
+
+      // process user input
+      currentLevel.getPlayer().assertInputState(keyHandler)
 
       // physics will go here
       console.log(frameTime)
 
+      // clear previous frame
+      canvas.clearFrame()
+
       // draw all drawables in current level
-      currentlevel.getDrawableEntities().map((drawable: IDrawable) => {
+      currentLevel.getDrawableEntities().map((drawable: IDrawable) => {
         drawable.draw(canvas.getRenderingContext())
       })
 
