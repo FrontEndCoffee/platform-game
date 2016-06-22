@@ -15,8 +15,8 @@
     "gravity": 50
   },
   "keys": {
-    "forwards": 39,
-    "backwards": 37,
-    "jump": 38
+    "forwards": "ArrowRight",
+    "backwards": "ArrowLeft",
+    "jump": " "
   }
 }
