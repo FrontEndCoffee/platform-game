@@ -5,6 +5,8 @@
 [![Stories in Ready](https://badge.waffle.io/FrontEndCoffee/platform-game.svg?label=ready&title=Ready)](http://waffle.io/FrontEndCoffee/platform-game)
 
 
+## About the project
+
 Years ago I built a platform game in javascript. However, at the time I didn't know JavaScript that well, and my code looked like shit. It's barely readable, and not at all scalable. In this repo I will rewrite that code.
 
 
@@ -12,3 +14,8 @@ Management sheet (including planning): [Project Management Sheet](https://docs.g
 
 
 The old source code: [here](https://github.com/FrontEndCoffee/platform-game/wiki/Old-Source)
+
+
+## Want to contribute?
+
+Read [this](https://github.com/FrontEndCoffee/platform-game/blob/master/contributors.md) first.
