@@ -1,3 +1,1 @@
-export class Gravity {
-    
-}
+export class Gravity {}

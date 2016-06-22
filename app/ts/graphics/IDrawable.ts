@@ -1,7 +1,7 @@
 import { Vector } from '../physics/Vector'
 import { Texture } from './Texture'
 
-export interface Drawable {
+export interface IDrawable {
     position: Vector
     size: Vector
     texture: Texture

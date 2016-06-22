@@ -1,19 +1,21 @@
 import { Level } from './Level'
 
 export class World {
-    
+
     private levels: Level[]
 
-    constructor(levelFile: any) {
+    constructor(levelFile: any, settingsFile: any) {
         this.levels = []
         for (let level in levelFile.getData('levels')) {
-            this.levels.push(new Level(levelFile.getData('levels')[level]))
+            if (levelFile.getData('levels')[level] !== undefined) {
+                this.levels.push(new Level(levelFile.getData('levels')[level], settingsFile))
+            }
         }
     }
 
     public getLevel(id: number): Level {
-        if (this.levels[id]===undefined) {
-            throw 'level with id: '+ id +' does not exist'
+        if (this.levels[id] === undefined) {
+            throw 'level with id: ' + id + ' does not exist'
         }
         return this.levels[id]
     }

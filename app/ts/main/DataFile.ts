@@ -1,5 +1,5 @@
-import { DataFileEventTarget } from './DataFileEventTarget'
-import { DataFileProgressEvent } from './DataFileProgressEvent'
+import { IDataFileEventTarget } from './IDataFileEventTarget'
+import { IDataFileProgressEvent } from './IDataFileProgressEvent'
 
 export class DataFile {
 
@@ -10,7 +10,7 @@ export class DataFile {
         this.callback = callback
         let request: XMLHttpRequest = new XMLHttpRequest()
         let context: DataFile = this
-        request.onload = (event: DataFileProgressEvent) => {
+        request.onload = (event: IDataFileProgressEvent) => {
             this.onDataFileLoad(event.target, context)
         }
         request.open('GET', fileURI, true)
@@ -21,7 +21,7 @@ export class DataFile {
         return this.data[key]
     }
 
-    private onDataFileLoad(response: DataFileEventTarget, context: DataFile): void {
+    private onDataFileLoad(response: IDataFileEventTarget, context: DataFile): void {
         context.data = JSON.parse(response.responseText);
         context.callback()
     }

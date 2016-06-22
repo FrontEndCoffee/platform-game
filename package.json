@@ -5,7 +5,7 @@
   "main": "index.js",
   "scripts": {
     "ci": "gulp build",
-    "gulp": "gulp",
+    "dev": "gulp",
     "test": "gulp test"
   },
   "repository": {

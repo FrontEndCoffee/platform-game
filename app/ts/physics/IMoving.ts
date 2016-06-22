@@ -1,6 +1,6 @@
 import { Vector } from './Vector'
 
-export interface Moving {
+export interface IMoving {
     position: Vector
     velocity: Vector
 

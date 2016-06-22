@@ -1,5 +1,3 @@
-import { DataFile } from './DataFile'
-
 export class KeyHandler {
 
     public keyForwards: string
@@ -10,7 +8,7 @@ export class KeyHandler {
     private keysDown: string[]
 
   constructor(settings: any) {
-    this.settings = settings.getData("keys")
+    this.settings = settings.getData('keys')
     this.keysDown = []
     this.keyForwards = this.settings['forwards']
     this.keyBackwards = this.settings['backwards']
@@ -39,7 +37,7 @@ export class KeyHandler {
         break
 
       default:
-        throw 'unknown keyevent: ' + event.type 
+        throw 'unknown keyevent: ' + event.type
     }
   }
 

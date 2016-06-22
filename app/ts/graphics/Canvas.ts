@@ -1,9 +1,8 @@
 import { Vector } from '../physics/Vector'
-import { DataFile } from '../main/DataFile'
-import { Drawable } from './Drawable'
+import { IDrawable } from './IDrawable'
 
 export class Canvas {
-    
+
     private physicalResolution: Vector
     private virtualResolution: Vector
     private context: Window
@@ -14,7 +13,7 @@ export class Canvas {
 
         let displaySettings: JSON = settings.getData('display')
         let physicalHeight: number = context.innerHeight
-        let physicalWidth : number = context.innerWidth
+        let physicalWidth: number = context.innerWidth
         let virtualHeight: number = displaySettings['height']
         let scale: number = virtualHeight / physicalHeight
         let virtualWidth: number = physicalWidth * scale
@@ -40,8 +39,8 @@ export class Canvas {
             0, 0, this.virtualResolution.getX(), this.virtualResolution.getY()
         )
     }
-    
-    public draw(drawable: Drawable): void {
+
+    public draw(drawable: IDrawable): void {
         drawable.draw(this.renderingContext)
     }
 
@@ -52,5 +51,5 @@ export class Canvas {
     public getRenderingContext(): CanvasRenderingContext2D {
         return this.renderingContext
     }
-    
+
 }

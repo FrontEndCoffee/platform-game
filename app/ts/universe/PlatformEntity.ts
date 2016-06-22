@@ -1,20 +1,16 @@
 import { Entity } from './Entity'
 import { Vector } from '../physics/Vector'
-import { Moving } from '../physics/Moving'
-import { Drawable } from '../graphics/Drawable'
+import { IPlatformEntity } from './IPlatformEntity'
 import { ColorTexture } from '../graphics/ColorTexture'
-import { Canvas } from '../graphics/Canvas'
 
-interface Platform extends Moving, Drawable {}
+export class PlatformEntity extends Entity implements IPlatformEntity {
 
-export class PlatformEntity extends Entity implements Platform {
-
-    position: Vector
-    velocity: Vector
-    size: Vector
-    texture: ColorTexture
-    isDrawable: boolean = true
-    hasPhysics: boolean = true
+    public position: Vector
+    public velocity: Vector
+    public size: Vector
+    public texture: ColorTexture
+    public isDrawable: boolean = true
+    public hasPhysics: boolean = true
 
     constructor(position: Vector, velocity: Vector, size: Vector, color: string) {
         super()
