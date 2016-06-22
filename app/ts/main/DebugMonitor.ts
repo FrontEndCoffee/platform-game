@@ -20,6 +20,9 @@ export class DebugMonitor {
     this.values = []
   }
 
+  /**
+   * Update the DOM to show changes
+   */
   public renderDebugElement(): void {
     let content: string = ''
     for (let i: number = 0; i < this.keys.length; i++) {
@@ -28,6 +31,10 @@ export class DebugMonitor {
     this.windowContext.document.getElementById('debug_monitor').innerHTML = content
   }
 
+  /**
+   * Create a datafield
+   * @param   key   name of the datafield
+   */
   public createField(key: string): void {
     if (this.keys.indexOf(key) !== -1) {
       throw 'Data field with key ' + key + ' already exists'
@@ -37,6 +44,10 @@ export class DebugMonitor {
     }
   }
 
+  /**
+   * Remove a datafield
+   * @param   key   name of the datafield
+   */
   public removeField(key: string): void {
     if (this.keys.indexOf(key) === -1) {
       throw 'Data field with key ' + key + ' does not exist'
@@ -47,27 +58,17 @@ export class DebugMonitor {
     }
   }
 
+  /**
+   * Update datafield contents
+   * @param   key     name of the to be updated datafield
+   * @param   value   new value of the datafield
+   */
   public updateField(key: string, value: string): void {
     if (this.keys.indexOf(key) === -1) {
       throw 'Data field with key ' + key + ' does not exist'
     } else {
       let index: number = this.keys.indexOf(key)
       this.values[index] = value
-    }
-  }
-
-  public updateFields(data: JSON): void {
-    if (data.hasOwnProperty('length')) {
-
-      for (let field in data) {
-        if (data[field] !== undefined) {
-          let fieldData: any = data[field]
-          if (fieldData.hasOwnProperty(length) && fieldData.length === 2) {
-            this.updateField(fieldData[0].toString, fieldData[1].toString())
-          }
-        }
-      }
-
     }
   }
 }
