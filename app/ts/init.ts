@@ -1,4 +1,4 @@
-import { DataFile } from './main/Datafile'
+import { DataFile } from './main/DataFile'
 import { World } from './universe/World'
 import { Level } from './universe/Level'
 import { Canvas } from './graphics/Canvas'
