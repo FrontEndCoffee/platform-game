@@ -31,6 +31,10 @@ export class PlayerEntity extends Entity implements IPlayerEntity {
     )
   }
 
+  /**
+   * Looks at the state of the keyhandler, and according to the state it will execute actions
+   * @param   keyHandler  instance of the keyhandler that keystates are read out of
+   */
   public assertInputState(keyHandler: KeyHandler): void {
     let isForwards: boolean = keyHandler.isKeyDown(keyHandler.keyForwards)
     let isBackwards: boolean = keyHandler.isKeyDown(keyHandler.keyBackwards)
@@ -39,6 +43,10 @@ export class PlayerEntity extends Entity implements IPlayerEntity {
     console.log(isForwards, isBackwards, isJump)
   }
 
+  /**
+   * Render the player onto the canvas
+   * @param   renderingContext  rendering context of the canvas the player gets rendered on
+   */
   public draw(renderingContext: CanvasRenderingContext2D): void {
     renderingContext.fillStyle = this.texture.getFillStyle()
     renderingContext.fillRect(
@@ -49,6 +57,10 @@ export class PlayerEntity extends Entity implements IPlayerEntity {
     )
   }
 
+  /**
+   * calculate physics for the given time period
+   * @param   seconds     timeframe over which the physics must be calculated
+   */
   public move(seconds: number): void {
     console.log('TODO implement code')
   }

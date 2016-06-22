@@ -13,6 +13,11 @@ export class World {
         }
     }
 
+    /**
+     * Get level by ID
+     * @param   id      get level by id
+     * @return          level instance
+     */
     public getLevel(id: number): Level {
         if (this.levels[id] === undefined) {
             throw 'level with id: ' + id + ' does not exist'
