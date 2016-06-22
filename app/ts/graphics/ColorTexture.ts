@@ -9,6 +9,10 @@ export class ColorTexture extends Texture {
         this.color = color
     }
 
+    /**
+     * Generates a fillstyle for this particular type of texture
+     * @returns             A fill style to be used elswhere
+     */
     public getFillStyle(): string {
         return this.color
     }

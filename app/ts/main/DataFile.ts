@@ -17,10 +17,20 @@ export class DataFile {
         request.send()
     }
 
+    /**
+     * Extract data from the datafile
+     * @param   key     key of the JSON object you want to extract
+     * @return          JSON object
+     */
     public getData(key: string): JSON {
         return this.data[key]
     }
 
+    /**
+     * event handler for the XMLHttpRequest in the constructor
+     * @param	response	the HTTP response object
+     * @param 	context     the current datafile instance  
+     */
     private onDataFileLoad(response: IDataFileEventTarget, context: DataFile): void {
         context.data = JSON.parse(response.responseText);
         context.callback()
