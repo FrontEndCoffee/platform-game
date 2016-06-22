@@ -32,7 +32,7 @@ gulp.task('ts', () => {
   return browserify({
     baseDir: '.',
     debug: true,
-    entries: ['app/ts/main.ts'],
+    entries: ['app/ts/init.ts'],
     cache: {},
     packageCache: {}
   })
@@ -99,7 +99,7 @@ gulp.task('build:ts', () => {
   return browserify({
     baseDir: '.',
     debug: false,
-    entries: ['app/ts/main.ts'],
+    entries: ['app/ts/init.ts'],
     cache: {},
     packageCache: {}
   })
