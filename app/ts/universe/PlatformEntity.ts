@@ -22,7 +22,8 @@ export class PlatformEntity extends Entity implements IPlatformEntity {
 
     /**
      * Draw a platform onto the screen
-     * @param   context     rendering context of the canvas that the platform needs to be rendered on
+     * @param   context     rendering context of the canvas that the platform needs to be
+     *                      rendered on.
      */
     public draw(context: CanvasRenderingContext2D): void {
         context.fillStyle = this.texture.getFillStyle()
@@ -33,7 +34,7 @@ export class PlatformEntity extends Entity implements IPlatformEntity {
             this.size.getY()
         )
     }
-    
+
     /**
      * calculate physics for the given time period
      * @param   seconds     timeframe over which the physics must be calculated

@@ -53,7 +53,7 @@ export class Level {
 
   /**
    * Get the player object
-    * @return	player object
+   * @return	player object
    */
   public getPlayer(): PlayerEntity {
     return this.player
