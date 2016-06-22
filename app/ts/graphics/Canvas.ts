@@ -34,12 +34,19 @@ export class Canvas {
         this.renderingContext.scale(1, -1)
     }
 
+    /**
+     * Wipes the entire canvas
+     */
     public clearFrame(): void {
         this.renderingContext.clearRect(
             0, 0, this.virtualResolution.getX(), this.virtualResolution.getY()
         )
     }
 
+    /**
+     * Renders a given drawable on the canvas
+     * @param   drawable    drawable to be rendered
+     */
     public draw(drawable: IDrawable): void {
         drawable.draw(this.renderingContext)
     }
