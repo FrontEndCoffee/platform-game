@@ -3,9 +3,10 @@ import { World } from './universe/World'
 import { Level } from './universe/Level'
 import { Canvas } from './graphics/Canvas'
 import { IDrawable } from './graphics/IDrawable'
+import { IHitBox } from './physics/IHitBox'
 import { KeyHandler } from './main/KeyHandler'
 import { DebugMonitor } from './main/DebugMonitor'
-
+import { PlayerEntity } from './universe/PlayerEntity'
 
 let settingsFile: DataFile = new DataFile('../res/settings.json', function(): void {
   let levelFile: DataFile = new DataFile('../res/levelfile.json', function(): void {
@@ -39,8 +40,29 @@ let settingsFile: DataFile = new DataFile('../res/settings.json', function(): vo
       currentLevel.getPlayer().assertInputState(keyHandler)
 
       // physics will go here
-      console.log(frameTime)
       currentLevel.getPlayer().move(frameTime / 1000)
+
+      // check player collision
+      currentLevel.getPhysicalEntities().map((entity: IHitBox) => {
+        let player: PlayerEntity = currentLevel.getPlayer()
+        let entityTop: number = entity.position.add(entity.size.scale(0.5)).getY()
+        let playerBottom: number = player.position.add(player.size.scale(-0.5)).getY()
+        let heightDiff: number = playerBottom - entityTop
+
+        if (player.isTouching(entity) &&
+            heightDiff <= 0 &&
+            heightDiff > player.velocity.scale(frameTime / 1000).getY() ) {
+
+          player.position.setY(
+            entity.position
+              .add(entity.size.scale(0.5))
+              .add(player.size.scale(0.5))
+              .getY()
+          )
+          player.velocity.setY(0)
+
+        }
+      })
 
       // clear previous frame
       canvas.clearFrame()
