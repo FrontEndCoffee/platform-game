@@ -39,8 +39,6 @@ export class PlayerEntity extends Entity implements IPlayerEntity {
     let isForwards: boolean = keyHandler.isKeyDown(keyHandler.keyForwards)
     let isBackwards: boolean = keyHandler.isKeyDown(keyHandler.keyBackwards)
     let isJump: boolean = keyHandler.isKeyDown(keyHandler.keyJump)
-
-    console.log(isForwards, isBackwards, isJump)
   }
 
   /**
