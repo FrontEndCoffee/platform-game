@@ -19,10 +19,8 @@ let settingsFile: DataFile = new DataFile('../res/settings.json', function(): vo
     let debugMonitor: DebugMonitor = new DebugMonitor(window)
 
     debugMonitor.createField('fps')
-    debugMonitor.createField('player_x')
-    debugMonitor.createField('player_y')
 
-    setInterval((_: any) => debugMonitor.renderDebugElement(), 400)
+    setInterval((_: any) => debugMonitor.renderDebugElement(), 100)
 
     // rendering loop
     let drawFrame: any = () => {
@@ -33,8 +31,6 @@ let settingsFile: DataFile = new DataFile('../res/settings.json', function(): vo
 
       // debug monitor
       debugMonitor.updateField('fps', Math.round(1000 / frameTime).toString())
-      debugMonitor.updateField('player_x', currentLevel.getPlayer().getVelocity().getX().toString())
-      debugMonitor.updateField('player_y', currentLevel.getPlayer().getVelocity().getY().toString())
 
       // process user input
       currentLevel.getPlayer().assertInputState(keyHandler)
@@ -43,8 +39,8 @@ let settingsFile: DataFile = new DataFile('../res/settings.json', function(): vo
       currentLevel.getPlayer().move(frameTime / 1000)
 
       // check player collision
+      let player: PlayerEntity = currentLevel.getPlayer()
       currentLevel.getPhysicalEntities().map((entity: IHitBox) => {
-        let player: PlayerEntity = currentLevel.getPlayer()
         let entityTop: number = entity.position.add(entity.size.scale(0.5)).getY()
         let playerBottom: number = player.position.add(player.size.scale(-0.5)).getY()
         let heightDiff: number = playerBottom - entityTop

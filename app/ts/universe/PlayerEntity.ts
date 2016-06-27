@@ -12,6 +12,7 @@ export class PlayerEntity extends Entity implements IPlayerEntity {
   public velocity: Vector
   public size: Vector
   public texture: ColorTexture
+  public isFlying: boolean
 
   private maxVelocity: Vector
   private acceleration: Vector
@@ -21,6 +22,7 @@ export class PlayerEntity extends Entity implements IPlayerEntity {
   constructor(settings: any) {
     super()
     let playerSettings: JSON = settings.getData('player')
+    this.isFlying = false
     this.gravity = playerSettings['gravity']
     this.position = new Vector(playerSettings['position'][0], playerSettings['position'][1])
     this.velocity = new Vector(playerSettings['velocity'][0], playerSettings['velocity'][1])
@@ -102,10 +104,10 @@ export class PlayerEntity extends Entity implements IPlayerEntity {
 
     // gravity
     this.velocity = this.velocity.add(gravity)
-    if (this.position.add(this.size.scale(-0.5)).getY() <= 0) {
-      this.position.setY(this.size.scale(0.5).getY())
-      this.velocity.setY(0)
-    }
+    // if (this.position.add(this.size.scale(-0.5)).getY() <= 0) {
+    //   this.position.setY(this.size.scale(0.5).getY())
+    //   this.velocity.setY(0)
+    // }
 
     // code for ground resistance
     if (this.noDirectionalKeysDown) {
