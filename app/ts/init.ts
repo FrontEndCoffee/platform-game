@@ -19,7 +19,7 @@ let settingsFile: DataFile = new DataFile('../res/settings.json', function(): vo
 
     debugMonitor.createField('fps')
     debugMonitor.createField('player_x')
-    debugMonitor.createField('player_y')    
+    debugMonitor.createField('player_y')
 
     setInterval((_: any) => debugMonitor.renderDebugElement(), 400)
 
@@ -32,14 +32,15 @@ let settingsFile: DataFile = new DataFile('../res/settings.json', function(): vo
 
       // debug monitor
       debugMonitor.updateField('fps', Math.round(1000 / frameTime).toString())
-      debugMonitor.updateField('player_x', currentLevel.getPlayer().getPosition().getX().toString())
-      debugMonitor.updateField('player_y', currentLevel.getPlayer().getPosition().getY().toString())
+      debugMonitor.updateField('player_x', currentLevel.getPlayer().getVelocity().getX().toString())
+      debugMonitor.updateField('player_y', currentLevel.getPlayer().getVelocity().getY().toString())
 
       // process user input
       currentLevel.getPlayer().assertInputState(keyHandler)
 
       // physics will go here
       console.log(frameTime)
+      currentLevel.getPlayer().move(frameTime / 1000)
 
       // clear previous frame
       canvas.clearFrame()
@@ -48,6 +49,9 @@ let settingsFile: DataFile = new DataFile('../res/settings.json', function(): vo
       currentLevel.getDrawableEntities().map((drawable: IDrawable) => {
         drawable.draw(canvas.getRenderingContext())
       })
+
+      // draw player
+      currentLevel.getPlayer().draw(canvas.getRenderingContext())
 
       window.requestAnimationFrame(drawFrame)
     }

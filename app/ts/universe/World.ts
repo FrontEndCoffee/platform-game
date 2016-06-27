@@ -2,10 +2,12 @@ import { Level } from './Level'
 
 export class World {
 
+    public gravity: number
     private levels: Level[]
 
     constructor(levelFile: any, settingsFile: any) {
         this.levels = []
+        this.gravity = settingsFile.getData('player')['gravity']
         for (let level in levelFile.getData('levels')) {
             if (levelFile.getData('levels')[level] !== undefined) {
                 this.levels.push(new Level(levelFile.getData('levels')[level], settingsFile))

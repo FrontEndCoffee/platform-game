@@ -5,6 +5,8 @@
   "main": "index.js",
   "scripts": {
     "ci": "gulp build",
+    "gulp": "gulp",
+    "lint": "gulp test:tslint",
     "dev": "gulp",
     "test": "gulp test"
   },
