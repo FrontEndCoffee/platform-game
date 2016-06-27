@@ -137,23 +137,30 @@ export class PlayerEntity extends Entity implements IPlayerEntity {
   }
 
   public isTouching(entity: IHitBox): boolean {
-    let entityMaxX: number = entity.position.add(entity.size.scale(0.5)).getX()
+    return this.isAltidunalOverlap(entity) && this.isLateralOverlap(entity)
+  }
+
+  public isAltidunalOverlap(entity: IHitBox): boolean {
     let entityMaxY: number = entity.position.add(entity.size.scale(0.5)).getY()
-    let entityMinX: number = entity.position.add(entity.size.scale(-0.5)).getX()
     let entityMinY: number = entity.position.add(entity.size.scale(-0.5)).getY()
-    let playerMaxX: number = this.position.add(this.size.scale(0.5)).getX()
     let playerMaxY: number = this.position.add(this.size.scale(0.5)).getY()
-    let playerMinX: number = this.position.add(this.size.scale(-0.5)).getX()
     let playerMinY: number = this.position.add(this.size.scale(-0.5)).getY()
 
     return (
-      (
-        ((entityMaxX > playerMinX) && (playerMaxX > entityMinX)) ||
-        ((entityMinX > playerMinX) && (playerMaxX > entityMinX))
-      ) && (
-        ((entityMaxY > playerMinY) && (playerMaxY > entityMinY)) ||
-        ((entityMinY > playerMinY) && (playerMaxY > entityMinY))
-      )
+      ((entityMaxY > playerMinY) && (playerMaxY > entityMinY)) ||
+      ((entityMinY > playerMinY) && (playerMaxY > entityMinY))
+    )
+  }
+
+  public isLateralOverlap(entity: IHitBox): boolean {
+    let entityMaxX: number = entity.position.add(entity.size.scale(0.5)).getX()
+    let entityMinX: number = entity.position.add(entity.size.scale(-0.5)).getX()
+    let playerMaxX: number = this.position.add(this.size.scale(0.5)).getX()
+    let playerMinX: number = this.position.add(this.size.scale(-0.5)).getX()
+
+    return (
+      ((entityMaxX > playerMinX) && (playerMaxX > entityMinX)) ||
+      ((entityMinX > playerMinX) && (playerMaxX > entityMinX))
     )
   }
 }
