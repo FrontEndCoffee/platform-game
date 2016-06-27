@@ -14,10 +14,12 @@ export class PlayerEntity extends Entity implements IPlayerEntity {
   private maxVelocity: Vector
   private acceleration: Vector
   private noDirectionalKeysDown: boolean
+  private gravity: number
 
   constructor(settings: any) {
     super()
     let playerSettings: JSON = settings.getData('player')
+    this.gravity = playerSettings['gravity']
     this.position = new Vector(playerSettings['position'][0], playerSettings['position'][1])
     this.velocity = new Vector(playerSettings['velocity'][0], playerSettings['velocity'][1])
     this.size = new Vector(playerSettings['size'][0], playerSettings['size'][1])
@@ -91,9 +93,17 @@ export class PlayerEntity extends Entity implements IPlayerEntity {
    */
   public move(seconds: number): void {
     let resistance: Vector = new Vector(this.acceleration.getX(), 0)
-   // let gravity: Vector = new Vector(0, 10)
+    let gravity: Vector = new Vector(0, -this.gravity)
 
+    // process basic movement
     this.position = this.position.add(this.velocity.scale(seconds))
+
+    // gravity
+    this.velocity = this.velocity.add(gravity)
+    if (this.position.add(this.size.scale(-0.5)).getY() <= 0) {
+      this.position.setY(this.size.scale(0.5).getY())
+      this.velocity.setY(0)
+    }
 
     // code for ground resistance
     if (this.noDirectionalKeysDown) {

@@ -17,6 +17,6 @@
   "keys": {
     "forwards": "ArrowRight",
     "backwards": "ArrowLeft",
-    "jump": " "
+    "jump": "ArrowUp"
   }
 }
