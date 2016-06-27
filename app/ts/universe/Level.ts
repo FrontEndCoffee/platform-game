@@ -96,11 +96,11 @@ export class Level {
 
   public getPhysicalEntities(): IHitBox[] {
     let result: IHitBox[] = []
-      this.entities.map((entity: any) => {
-          if (entity.isPhysical === true) {
-              result.push(entity)
-          }
-      })
-      return result
+    this.entities.map((entity: any) => {
+      if (entity.isPhysical === true) {
+        result.push(entity)
+      }
+    })
+    return result
   }
 }
