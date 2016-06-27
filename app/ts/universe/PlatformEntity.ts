@@ -10,7 +10,7 @@ export class PlatformEntity extends Entity implements IPlatformEntity {
     public size: Vector
     public texture: ColorTexture
     public isDrawable: boolean = true
-    public hasPhysics: boolean = true
+    public isPhysical: boolean = true
 
     constructor(position: Vector, velocity: Vector, size: Vector, color: string) {
         super()
