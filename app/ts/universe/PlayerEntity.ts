@@ -3,6 +3,8 @@ import { Vector } from '../physics/Vector'
 import { ColorTexture } from '../graphics/ColorTexture'
 import { KeyHandler } from '../main/KeyHandler'
 import { IPlayerEntity } from './IPlayerEntity'
+import { IHitBox } from '../physics/IHitBox'
+
 
 export class PlayerEntity extends Entity implements IPlayerEntity {
 
@@ -130,5 +132,26 @@ export class PlayerEntity extends Entity implements IPlayerEntity {
 
   public getVelocity(): Vector {
     return this.velocity
+  }
+
+  public isTouching(entity: IHitBox): boolean {
+    let entityMaxX: number = entity.position.add(entity.size.scale(0.5)).getX()
+    let entityMaxY: number = entity.position.add(entity.size.scale(0.5)).getY()
+    let entityMinX: number = entity.position.add(entity.size.scale(-0.5)).getX()
+    let entityMinY: number = entity.position.add(entity.size.scale(-0.5)).getY()
+    let playerMaxX: number = this.position.add(this.size.scale(0.5)).getX()
+    let playerMaxY: number = this.position.add(this.size.scale(0.5)).getY()
+    let playerMinX: number = this.position.add(this.size.scale(-0.5)).getX()
+    let playerMinY: number = this.position.add(this.size.scale(-0.5)).getY()
+
+    return (
+      (
+        ((entityMaxX > playerMinX) && (playerMaxX > entityMinX)) ||
+        ((entityMinX > playerMinX) && (playerMaxX > entityMinX))
+      ) && (
+        ((entityMaxY > playerMinY) && (playerMaxY > entityMinY)) ||
+        ((entityMinY > playerMinY) && (playerMaxY > entityMinY))
+      )
+    )
   }
 }
