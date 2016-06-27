@@ -5,11 +5,11 @@
   },
   "player": {
     "size": [100,100],
-    "position": [0,0],
+    "position": [50,50],
     "velocity": [0,0],
     "color": "#bada55",
-    "lateralAcceleration": 20,
-    "maxLateralVelocity": 400,
+    "lateralAcceleration": 70,
+    "maxLateralVelocity": 700,
     "altitudinalAcceleration": 1000,
     "maxAltitudinalVelocity": 1000,
     "gravity": 50
@@ -17,6 +17,6 @@
   "keys": {
     "forwards": "ArrowRight",
     "backwards": "ArrowLeft",
-    "jump": " "
+    "jump": "ArrowUp"
   }
 }

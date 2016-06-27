@@ -13,10 +13,13 @@ export class PlayerEntity extends Entity implements IPlayerEntity {
 
   private maxVelocity: Vector
   private acceleration: Vector
+  private noDirectionalKeysDown: boolean
+  private gravity: number
 
   constructor(settings: any) {
     super()
     let playerSettings: JSON = settings.getData('player')
+    this.gravity = playerSettings['gravity']
     this.position = new Vector(playerSettings['position'][0], playerSettings['position'][1])
     this.velocity = new Vector(playerSettings['velocity'][0], playerSettings['velocity'][1])
     this.size = new Vector(playerSettings['size'][0], playerSettings['size'][1])
@@ -29,6 +32,7 @@ export class PlayerEntity extends Entity implements IPlayerEntity {
       playerSettings['lateralAcceleration'],
       playerSettings['altitudinalAcceleration']
     )
+    this.noDirectionalKeysDown = true
   }
 
   /**
@@ -39,8 +43,34 @@ export class PlayerEntity extends Entity implements IPlayerEntity {
     let isForwards: boolean = keyHandler.isKeyDown(keyHandler.keyForwards)
     let isBackwards: boolean = keyHandler.isKeyDown(keyHandler.keyBackwards)
     let isJump: boolean = keyHandler.isKeyDown(keyHandler.keyJump)
+    let newVelocity: Vector = this.velocity
 
-    console.log(isForwards, isBackwards, isJump)
+    if (isForwards) {
+      newVelocity = this.velocity.add(new Vector(this.acceleration.getX(), 0))
+      if (newVelocity.getX() > this.maxVelocity.getX()) {
+        newVelocity.setX(this.maxVelocity.getX())
+      }
+    }
+    if (isBackwards) {
+      newVelocity = this.velocity = this.velocity.add(new Vector(-this.acceleration.getX(), 0))
+      if (newVelocity.getX() < -this.maxVelocity.getX()) {
+        newVelocity.setX(-this.maxVelocity.getX())
+      }
+    }
+    if (isJump) {
+      newVelocity = this.velocity.add(new Vector(0, this.acceleration.getY()))
+      if (newVelocity.getY() > this.maxVelocity.getY()) {
+        newVelocity.setY(this.maxVelocity.getY())
+      }
+    }
+
+    if (!isForwards && !isBackwards) {
+      this.noDirectionalKeysDown = true
+    } else {
+      this.noDirectionalKeysDown = false
+    }
+
+    this.velocity = newVelocity
   }
 
   /**
@@ -62,10 +92,43 @@ export class PlayerEntity extends Entity implements IPlayerEntity {
    * @param   seconds     timeframe over which the physics must be calculated
    */
   public move(seconds: number): void {
-    console.log('TODO implement code')
+    let resistance: Vector = new Vector(this.acceleration.getX(), 0)
+    let gravity: Vector = new Vector(0, -this.gravity)
+
+    // process basic movement
+    this.position = this.position.add(this.velocity.scale(seconds))
+
+    // gravity
+    this.velocity = this.velocity.add(gravity)
+    if (this.position.add(this.size.scale(-0.5)).getY() <= 0) {
+      this.position.setY(this.size.scale(0.5).getY())
+      this.velocity.setY(0)
+    }
+
+    // code for ground resistance
+    if (this.noDirectionalKeysDown) {
+      if (this.velocity.getX() > 0) {
+        if (this.velocity.getX() < resistance.getX()) {
+          this.velocity.setX(0)
+        } else {
+          this.velocity.setX(
+            this.velocity.add(resistance.scale(-1)).getX()
+          )
+        }
+      }
+      if (this.velocity.getX() < 0) {
+        if (this.velocity.getX() > resistance.getX()) {
+          this.velocity.setX(0)
+        } else {
+          this.velocity.setX(
+            this.velocity.add(resistance.scale(1)).getX()
+          )
+        }
+      }
+    }
   }
 
-  public getPosition(): Vector {
-    return this.position
+  public getVelocity(): Vector {
+    return this.velocity
   }
 }
