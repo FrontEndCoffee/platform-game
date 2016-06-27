@@ -20,7 +20,7 @@ let settingsFile: DataFile = new DataFile('../res/settings.json', function(): vo
 
     debugMonitor.createField('fps')
 
-    setInterval((_: any) => debugMonitor.renderDebugElement(), 100)
+    setInterval((_: any) => debugMonitor.renderDebugElement(), 200)
 
     // rendering loop
     let drawFrame: any = () => {
