@@ -18,6 +18,7 @@ export class PlayerEntity extends Entity implements IPlayerEntity {
   private acceleration: Vector
   private noDirectionalKeysDown: boolean
   private gravity: number
+  private userHasLetGoOfTheJumpKey: boolean
 
   constructor(settings: any) {
     super()
@@ -37,6 +38,7 @@ export class PlayerEntity extends Entity implements IPlayerEntity {
       playerSettings['altitudinalAcceleration']
     )
     this.noDirectionalKeysDown = true
+    this.userHasLetGoOfTheJumpKey = true
   }
 
   /**
@@ -61,7 +63,8 @@ export class PlayerEntity extends Entity implements IPlayerEntity {
         newVelocity.setX(-this.maxVelocity.getX())
       }
     }
-    if (isJump && !this.isFlying) {
+    if (isJump && !this.isFlying && this.userHasLetGoOfTheJumpKey) {
+      this.userHasLetGoOfTheJumpKey = false
       newVelocity = this.velocity.add(new Vector(0, this.acceleration.getY()))
       if (newVelocity.getY() > this.maxVelocity.getY()) {
         newVelocity.setY(this.maxVelocity.getY())
@@ -72,6 +75,10 @@ export class PlayerEntity extends Entity implements IPlayerEntity {
       this.noDirectionalKeysDown = true
     } else {
       this.noDirectionalKeysDown = false
+    }
+
+    if (!isJump) {
+      this.userHasLetGoOfTheJumpKey = true
     }
 
     this.velocity = newVelocity
