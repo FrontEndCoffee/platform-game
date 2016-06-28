@@ -8,8 +8,8 @@ import { KeyHandler } from './main/KeyHandler'
 import { DebugMonitor } from './main/DebugMonitor'
 import { PlayerEntity } from './universe/PlayerEntity'
 
-let settingsFile: DataFile = new DataFile('../res/settings.json', function(): void {
-  let levelFile: DataFile = new DataFile('../res/levelfile.json', function(): void {
+let settingsFile: DataFile = new DataFile('res/settings.json', function(): void {
+  let levelFile: DataFile = new DataFile('res/levelfile.json', function(): void {
 
     let world: World = new World(levelFile, settingsFile)
     let currentLevel: Level = world.getLevel(0)
