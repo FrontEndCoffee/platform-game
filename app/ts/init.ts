@@ -43,7 +43,10 @@ let settingsFile: DataFile = new DataFile('../res/settings.json', function(): vo
       // check player collision
       let player: PlayerEntity = currentLevel.getPlayer()
       let gravity: number = settingsFile.getData('player')['gravity']
+      let proximateEntityCount: number = 0
+
       currentLevel.getPhysicalEntities().map((entity: IHitBox) => {
+
         let entityTop: number = entity.position.add(entity.size.scale(0.5)).getY()
         let playerBottom: number = player.position.add(player.size.scale(-0.5)).getY()
         let heightDiff: number = playerBottom - entityTop
@@ -61,9 +64,14 @@ let settingsFile: DataFile = new DataFile('../res/settings.json', function(): vo
           )
           player.velocity.setY(0)
         }
+
+        if (player.isLateralOverlap(entity) && Math.abs(heightDiff) <= gravity) {
+          proximateEntityCount++
+        }
+
       })
 
-      player.isFlying = (Math.abs(player.velocity.getY()) > gravity)
+      player.isFlying = proximateEntityCount === 0
 
       // clear previous frame
       canvas.clearFrame()
