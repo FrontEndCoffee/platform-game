@@ -61,7 +61,7 @@ export class PlayerEntity extends Entity implements IPlayerEntity {
         newVelocity.setX(-this.maxVelocity.getX())
       }
     }
-    if (isJump) {
+    if (isJump && !this.isFlying) {
       newVelocity = this.velocity.add(new Vector(0, this.acceleration.getY()))
       if (newVelocity.getY() > this.maxVelocity.getY()) {
         newVelocity.setY(this.maxVelocity.getY())

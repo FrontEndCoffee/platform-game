@@ -19,6 +19,7 @@ let settingsFile: DataFile = new DataFile('../res/settings.json', function(): vo
     let debugMonitor: DebugMonitor = new DebugMonitor(window)
 
     debugMonitor.createField('fps')
+    debugMonitor.createField('flying')
 
     setInterval((_: any) => debugMonitor.renderDebugElement(), 200)
 
@@ -31,6 +32,7 @@ let settingsFile: DataFile = new DataFile('../res/settings.json', function(): vo
 
       // debug monitor
       debugMonitor.updateField('fps', Math.round(1000 / frameTime).toString())
+      debugMonitor.updateField('flying', currentLevel.getPlayer().isFlying.toString())
 
       // process user input
       currentLevel.getPlayer().assertInputState(keyHandler)
@@ -40,7 +42,7 @@ let settingsFile: DataFile = new DataFile('../res/settings.json', function(): vo
 
       // check player collision
       let player: PlayerEntity = currentLevel.getPlayer()
-      let hasLanded: boolean = false
+      let gravity: number = settingsFile.getData('player')['gravity']
       currentLevel.getPhysicalEntities().map((entity: IHitBox) => {
         let entityTop: number = entity.position.add(entity.size.scale(0.5)).getY()
         let playerBottom: number = player.position.add(player.size.scale(-0.5)).getY()
@@ -59,22 +61,9 @@ let settingsFile: DataFile = new DataFile('../res/settings.json', function(): vo
           )
           player.velocity.setY(0)
         }
-
-        if (player.isLateralOverlap(entity) &&
-            Math.abs(heightDiff) < currentVelocity * 2) {
-
-          hasLanded = true
-        } 
-
-        
       })
 
-      if (hasLanded) {
-        player.isFlying = false
-      } else {
-        player.isFlying = true
-      }
-      // console.log(player.isFlying)
+      player.isFlying = (Math.abs(player.velocity.getY()) > gravity)
 
       // clear previous frame
       canvas.clearFrame()
