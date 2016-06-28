@@ -93,7 +93,7 @@ gulp.task('build:clean', () => {
 })
 
 gulp.task('build:html', () => {
-  return gulp.src(['app/**/*.html', 'app/**/*.css'])
+  return gulp.src(['app/**/*.html', 'app/**/*.css', 'app/**/*.json'])
     .pipe(gulp.dest('dist'))
 })
 
