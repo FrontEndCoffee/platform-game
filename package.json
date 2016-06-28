@@ -6,8 +6,7 @@
   "scripts": {
     "ci": "gulp build",
     "gulp": "gulp",
-    "lint": "gulp test:tslint",
-    "dev": "gulp",
+    "start": "gulp",
     "test": "gulp test"
   },
   "repository": {
