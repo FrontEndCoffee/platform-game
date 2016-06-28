@@ -77,7 +77,9 @@ gulp.task('test:unit:test', () => {
 gulp.task('test:tslint', () => {
   return gulp.src('app/ts/**/*.ts')
     .pipe(tslint())
-    .pipe(tslint.report('verbose'))
+    .pipe(tslint.report('prose', {
+      emitError: true
+    }))
 })
 
 // build related tasks

@@ -19,10 +19,9 @@ let settingsFile: DataFile = new DataFile('../res/settings.json', function(): vo
     let debugMonitor: DebugMonitor = new DebugMonitor(window)
 
     debugMonitor.createField('fps')
-    debugMonitor.createField('player_x')
-    debugMonitor.createField('player_y')
+    debugMonitor.createField('flying')
 
-    setInterval((_: any) => debugMonitor.renderDebugElement(), 400)
+    setInterval((_: any) => debugMonitor.renderDebugElement(), 200)
 
     // rendering loop
     let drawFrame: any = () => {
@@ -33,8 +32,7 @@ let settingsFile: DataFile = new DataFile('../res/settings.json', function(): vo
 
       // debug monitor
       debugMonitor.updateField('fps', Math.round(1000 / frameTime).toString())
-      debugMonitor.updateField('player_x', currentLevel.getPlayer().getVelocity().getX().toString())
-      debugMonitor.updateField('player_y', currentLevel.getPlayer().getVelocity().getY().toString())
+      debugMonitor.updateField('flying', currentLevel.getPlayer().isFlying.toString())
 
       // process user input
       currentLevel.getPlayer().assertInputState(keyHandler)
@@ -43,15 +41,20 @@ let settingsFile: DataFile = new DataFile('../res/settings.json', function(): vo
       currentLevel.getPlayer().move(frameTime / 1000)
 
       // check player collision
+      let player: PlayerEntity = currentLevel.getPlayer()
+      let gravity: number = settingsFile.getData('player')['gravity']
+      let proximateEntityCount: number = 0
+
       currentLevel.getPhysicalEntities().map((entity: IHitBox) => {
-        let player: PlayerEntity = currentLevel.getPlayer()
+
         let entityTop: number = entity.position.add(entity.size.scale(0.5)).getY()
         let playerBottom: number = player.position.add(player.size.scale(-0.5)).getY()
         let heightDiff: number = playerBottom - entityTop
+        let currentVelocity: number = player.velocity.scale(frameTime / 1000).getY()
 
         if (player.isTouching(entity) &&
             heightDiff <= 0 &&
-            heightDiff > player.velocity.scale(frameTime / 1000).getY() ) {
+            heightDiff > currentVelocity ) {
 
           player.position.setY(
             entity.position
@@ -60,9 +63,15 @@ let settingsFile: DataFile = new DataFile('../res/settings.json', function(): vo
               .getY()
           )
           player.velocity.setY(0)
-
         }
+
+        if (player.isLateralOverlap(entity) && Math.abs(heightDiff) <= gravity) {
+          proximateEntityCount++
+        }
+
       })
+
+      player.isFlying = proximateEntityCount === 0
 
       // clear previous frame
       canvas.clearFrame()

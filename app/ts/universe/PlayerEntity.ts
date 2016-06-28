@@ -12,15 +12,18 @@ export class PlayerEntity extends Entity implements IPlayerEntity {
   public velocity: Vector
   public size: Vector
   public texture: ColorTexture
+  public isFlying: boolean
 
   private maxVelocity: Vector
   private acceleration: Vector
   private noDirectionalKeysDown: boolean
   private gravity: number
+  private userHasLetGoOfTheJumpKey: boolean
 
   constructor(settings: any) {
     super()
     let playerSettings: JSON = settings.getData('player')
+    this.isFlying = false
     this.gravity = playerSettings['gravity']
     this.position = new Vector(playerSettings['position'][0], playerSettings['position'][1])
     this.velocity = new Vector(playerSettings['velocity'][0], playerSettings['velocity'][1])
@@ -35,6 +38,7 @@ export class PlayerEntity extends Entity implements IPlayerEntity {
       playerSettings['altitudinalAcceleration']
     )
     this.noDirectionalKeysDown = true
+    this.userHasLetGoOfTheJumpKey = true
   }
 
   /**
@@ -59,7 +63,8 @@ export class PlayerEntity extends Entity implements IPlayerEntity {
         newVelocity.setX(-this.maxVelocity.getX())
       }
     }
-    if (isJump) {
+    if (isJump && !this.isFlying && this.userHasLetGoOfTheJumpKey) {
+      this.userHasLetGoOfTheJumpKey = false
       newVelocity = this.velocity.add(new Vector(0, this.acceleration.getY()))
       if (newVelocity.getY() > this.maxVelocity.getY()) {
         newVelocity.setY(this.maxVelocity.getY())
@@ -70,6 +75,10 @@ export class PlayerEntity extends Entity implements IPlayerEntity {
       this.noDirectionalKeysDown = true
     } else {
       this.noDirectionalKeysDown = false
+    }
+
+    if (!isJump) {
+      this.userHasLetGoOfTheJumpKey = true
     }
 
     this.velocity = newVelocity
@@ -102,10 +111,10 @@ export class PlayerEntity extends Entity implements IPlayerEntity {
 
     // gravity
     this.velocity = this.velocity.add(gravity)
-    if (this.position.add(this.size.scale(-0.5)).getY() <= 0) {
-      this.position.setY(this.size.scale(0.5).getY())
-      this.velocity.setY(0)
-    }
+    // if (this.position.add(this.size.scale(-0.5)).getY() <= 0) {
+    //   this.position.setY(this.size.scale(0.5).getY())
+    //   this.velocity.setY(0)
+    // }
 
     // code for ground resistance
     if (this.noDirectionalKeysDown) {
@@ -135,23 +144,30 @@ export class PlayerEntity extends Entity implements IPlayerEntity {
   }
 
   public isTouching(entity: IHitBox): boolean {
-    let entityMaxX: number = entity.position.add(entity.size.scale(0.5)).getX()
+    return this.isAltidunalOverlap(entity) && this.isLateralOverlap(entity)
+  }
+
+  public isAltidunalOverlap(entity: IHitBox): boolean {
     let entityMaxY: number = entity.position.add(entity.size.scale(0.5)).getY()
-    let entityMinX: number = entity.position.add(entity.size.scale(-0.5)).getX()
     let entityMinY: number = entity.position.add(entity.size.scale(-0.5)).getY()
-    let playerMaxX: number = this.position.add(this.size.scale(0.5)).getX()
     let playerMaxY: number = this.position.add(this.size.scale(0.5)).getY()
-    let playerMinX: number = this.position.add(this.size.scale(-0.5)).getX()
     let playerMinY: number = this.position.add(this.size.scale(-0.5)).getY()
 
     return (
-      (
-        ((entityMaxX > playerMinX) && (playerMaxX > entityMinX)) ||
-        ((entityMinX > playerMinX) && (playerMaxX > entityMinX))
-      ) && (
-        ((entityMaxY > playerMinY) && (playerMaxY > entityMinY)) ||
-        ((entityMinY > playerMinY) && (playerMaxY > entityMinY))
-      )
+      ((entityMaxY > playerMinY) && (playerMaxY > entityMinY)) ||
+      ((entityMinY > playerMinY) && (playerMaxY > entityMinY))
+    )
+  }
+
+  public isLateralOverlap(entity: IHitBox): boolean {
+    let entityMaxX: number = entity.position.add(entity.size.scale(0.5)).getX()
+    let entityMinX: number = entity.position.add(entity.size.scale(-0.5)).getX()
+    let playerMaxX: number = this.position.add(this.size.scale(0.5)).getX()
+    let playerMinX: number = this.position.add(this.size.scale(-0.5)).getX()
+
+    return (
+      ((entityMaxX > playerMinX) && (playerMaxX > entityMinX)) ||
+      ((entityMinX > playerMinX) && (playerMaxX > entityMinX))
     )
   }
 }
