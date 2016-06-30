@@ -13,9 +13,14 @@ Years ago I built a platform game in javascript. However, at the time I didn't k
 Management sheet (including planning): [Project Management Sheet](https://docs.google.com/spreadsheets/d/19_o8ZLLTTwQKbAtxGisCgpYb1o-3hJ0xCf11-bO4-Co/edit?usp=sharing)
 
 
-The old source code: [here](https://github.com/FrontEndCoffee/platform-game/wiki/Old-Source)
+The old source code: [here](../../wiki/Old-Source)
 
 
 ## Want to contribute?
 
-Read [this](https://github.com/FrontEndCoffee/platform-game/blob/master/contributors.md) first.
+Read [this](./contributors.md) first.  
+Make sure you install all the [dependencies](./dependencies.md).
+
+### Troubleshooting your development environment
+
+If you are unable to set up your environment, please make sure to first check [troubleshooting](./troubleshooting.md) before opening an issue!

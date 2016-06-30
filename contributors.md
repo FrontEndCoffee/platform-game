@@ -14,10 +14,11 @@ $ npm install
 
 ## 2. Development Enviroment
 
-In order to compile the typescript files each time you make an edit, use the following command: 
+In order to compile the typescript files each time you make an edit, use the following command:
+**NOTE**: Keep this running while developing.
 
 ```
-$ npm run dev
+$ npm run start
 ```
 
 Before you commit, you should always run unit and lint tests on your code, to do this run:
