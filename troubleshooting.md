@@ -18,4 +18,4 @@ SyntaxError: Unexpected token >
 [truncated...]
 ```
 
-This is an issue with your node version. Check out [Troubleshooting 1.1](#Header1.1)
+This is an issue with your node version. Check out [Troubleshooting 1.1](#11-check-node-and-npm-version)

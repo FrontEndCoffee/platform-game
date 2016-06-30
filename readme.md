@@ -13,7 +13,7 @@ Years ago I built a platform game in javascript. However, at the time I didn't k
 Management sheet (including planning): [Project Management Sheet](https://docs.google.com/spreadsheets/d/19_o8ZLLTTwQKbAtxGisCgpYb1o-3hJ0xCf11-bO4-Co/edit?usp=sharing)
 
 
-The old source code: [[here]|Old-Source]
+The old source code: [here](../../wiki/Old-Source)
 
 
 ## Want to contribute?
